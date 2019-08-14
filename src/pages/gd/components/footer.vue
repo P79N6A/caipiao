@@ -5,9 +5,9 @@
                 <div class="home_bg"></div>
                 <div class="home_wz">采购</div>
             </router-link>
-            <div>
+            <!-- <div>
                 <img src="@/assets/img/gd/anniu.png" alt="" />
-            </div>
+            </div> -->
             <template v-if='loginState'>
                 <router-link tag='div' to='/account' :class="current==2?'My hover':'My'">
                     <div class="My_bg"></div>
@@ -26,7 +26,7 @@
 </template>
 <script>
   export default {
-    props:['loginState','current'],
+    //props:['loginState','current'],
   };
 </script>
 <style lang="less" scoped>

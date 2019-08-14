@@ -148,7 +148,7 @@ const router = new Router({
 		{
 			path: '/gd',
 			name: 'gd',
-			component: () => import('../pages/gd/index.vue')
+			component: () => import('@/pages/gd/index')
 		}
 	],
 	//进入页面就到定点到顶点

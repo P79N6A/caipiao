@@ -5,7 +5,7 @@
                 <div class="home_bg"></div>
                 <div class="home_wz">首页</div>
             </router-link>
-            <router-link to='/' tag='div' :class="current==1?'gdy hover':'gdy'">
+            <router-link to='/gd' tag='div' :class="current==1?'gdy hover':'gdy'">
                 <div class="gd_bg"></div>
                 <div class="gd_wz">跟单</div>
             </router-link>
