@@ -5,10 +5,11 @@
                 <div class="home_bg"></div>
                 <div class="home_wz">购彩</div>
             </router-link>
-            <!-- <div>
-                <img src="../../assets/img/gd/anniu.png" alt="" />
-            </div> -->
-            <template v-if='loginState'>
+            <!-- <router-link to='/gd' tag='div' :class="current==1?'gdy hover':'gdy'">
+                <div class="gd_bg"></div>
+            </router-link> -->
+            <div class="gd-btn"></div>
+             <template v-if='loginState'>
                 <router-link tag='div' to='/account' :class="current==2?'My hover':'My'">
                     <div class="My_bg"></div>
                     <div class="My_wz" >我的</div>
@@ -26,7 +27,7 @@
 </template>
 <script>
   export default {
-    //props:['loginState','current'],
+    props:['loginState','current'],
   };
 </script>
 <style lang="less" scoped>
@@ -85,14 +86,21 @@
         padding-left: 1rem;
         box-sizing: border-box;
     }
-    .gd_bg{
+    /* .gd_bg{
         width: 0.4rem;
         height: 0.4rem;
-        background: url(../assets/img/home_b.png) 0 -0.5rem no-repeat;
+        background: url(../assets/img/gd/anniu.png) 0 -0.5rem no-repeat;
         background-size: 100%;
         margin-top: 0.15rem;
         margin-bottom: 7px;
         margin-left: 3px;
+    } */
+    .gd-btn {
+        /* width: 0.78rem;
+        height: 0.78rem; */
+        /* margin-top: 0.12rem;
+        vertical-align: top;
+        transition: 1s; */
     }
     .My{
         padding-left: 1rem;
