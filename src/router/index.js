@@ -148,7 +148,10 @@ const router = new Router({
 		{
 			path: '/gd',
 			name: 'gd',
-			component: () => import('@/pages/gd/index')
+			component: () => import('@/pages/gd/index'),
+			children: [
+				{path: 'gd/search', component: () => import('@/pages/gd/search')}
+			]
 		}
 	],
 	//进入页面就到定点到顶点

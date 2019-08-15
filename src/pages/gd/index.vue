@@ -59,7 +59,11 @@
       <div class="hot-top">
         <div class="top-l">
           <span class="title">热门跟单</span>
-          <a href=""></a>
+          
+            <router-link to='gd/search'>
+              <span  class="search"> </span>
+            </router-link>
+          
         </div>
         <div class="top-r">
           <span class="follow-icon"></span>
@@ -195,7 +199,15 @@
     </div>
     
     <!-- 返回顶部按钮 -->
+    <img class="back" 
+         src="../../assets/img/gd/huojian.png"
+         v-show="!showBack"
+         @click="backTopAction" />
 
+    <!-- 到达底部 -->
+    <div class="loading" v-show="!showLoading">
+      <span>已加载全部数据</span>
+    </div>
     <!-- 底部导航 -->
     <gd-footer></gd-footer>
   </div>
@@ -209,6 +221,8 @@
     },
     data() {
       return {
+        showLoading: false,
+        showBack: false,
         redList: [{
             title: '放松放松',
             index: 1
@@ -238,6 +252,22 @@
             index: 7
           }
         ]
+      }
+    },
+    methods: {
+      backTopAction() {
+        scrollTo(0, 0);
+      },
+      loadingAction() {
+        window.addEventListener('scroll', function(){
+        const scrollHeight = document.body.scrollHeight || document.documentElement.scrollHeight;
+        const clientHeight = document.body.clientHeight || document.documentElement.scrollHeight;
+        const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+        if(scrollTop >= scrollHeight - clientHeight){
+            console.log('页面滑动到底部')
+            this.showLoading = !this.showLoading;
+        }
+        })
       }
     }
   }
@@ -401,7 +431,7 @@
           float: left;
         }
 
-        a {
+        .search{
           width: 0.34rem;
           height: 0.34rem;
           background: url('../../assets/img/gd/search.png') no-repeat;
@@ -623,4 +653,28 @@
     }
   }
 
+  .back {
+    display: inline;
+    width: 0.7rem;
+    height: 0.7rem;
+    position: fixed;
+    bottom: 2rem;
+    right: 0.5rem;
+    z-index: 9999;
+  }
+
+  .loading {
+    /* display: none; */
+    overflow: hidden;
+    height: 1.3em;
+    margin-top: -0.3em;
+    line-height: 1.5em;
+    vertical-align: text-bottom;
+    position: fixed;
+    bottom: 1rem;
+    font-size: 0.32rem;
+    text-align: center;
+    width: 100%;
+    background: #EEE;
+  }
 </style>
