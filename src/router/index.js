@@ -278,7 +278,7 @@ const router = new Router({
     {
       path: '/gd',
       name: 'gd',
-      component: () => import('@/pages/gd/redbill'),
+      component: () => import('@/pages/gd/profit'),
       children: [{
         path: 'gd/search',
         component: () => import('@/pages/gd/search')
@@ -290,6 +290,10 @@ const router = new Router({
       {
         path: 'gd/redbill',
         component: () => import('@/pages/gd/redbill')
+      },
+      {
+        path: 'gd/profit',
+        component: () => import('@/pages/gd/profit')
       }]
     }
   ],
