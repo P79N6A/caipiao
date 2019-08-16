@@ -1,7 +1,7 @@
 <template>
   <div id="redbill">
     <header class="header">
-      <i class="msg-icon"></i>
+      <i class="msg-icon" @click="backAction"></i>
       <h1>晒红单</h1>
     </header>
     <div class="content clearfix">
@@ -28,6 +28,11 @@
             return {
                 redbillList: []
             }
+        },
+        methods: {
+          backAction() {
+            this.$router.go(-1);s
+          }
         },
         created() {
             allSensationList().then( res => {

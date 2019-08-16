@@ -1,7 +1,7 @@
 <template>
   <div id="profit">
     <header class="header">
-      <i class="msg-icon"></i>
+      <span class="msg-icon" @click="backAction"></span>
       <nav class="title">
         <h1 class="active">命中榜</h1>
         <h1>盈利榜</h1>
@@ -36,6 +36,11 @@
     data() {
       return {
         profitList: []
+      }
+    },
+    methods: {
+      backAction() {
+        this.$router.go(-1);
       }
     },
     created() {

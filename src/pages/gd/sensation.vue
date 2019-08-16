@@ -1,7 +1,7 @@
 <template>
   <div id="sensation">
     <header class="header">
-      <i class="msg-icon"></i>
+      <i class="msg-icon" @click="backAction"></i>
       <h1>全部红人</h1>
     </header>
     <div>
@@ -34,6 +34,11 @@
             return {
                 allList: []
             }
+        },
+        methods: {
+          backAction() {
+            this.$router.go(-1);
+          }
         },
         created() {
             allSensationList().then( res => {
