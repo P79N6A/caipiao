@@ -138,3 +138,7 @@ export const checklogin = p =>get('/api/phpu/cl.phpx',p)
 export const sensationList = p => get('/api//cpdata/copy/webRedPersons.json', p)
 //热门跟单列表数据
 export const hotDocmentsList = p => get('/api/phpt/copyJczqs.phpx', p);
+//全部红人
+export const allSensationList = p => get('/api//cpdata/copy/webRedPersonList.json', p);
+
+

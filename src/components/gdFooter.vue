@@ -5,9 +5,11 @@
                 <div class="home_bg"></div>
                 <div class="home_wz">购彩</div>
             </router-link>
-            <!-- <router-link to='/gd' tag='div' :class="current==1?'gdy hover':'gdy'">
-                <div class="gd_bg"></div>
-            </router-link> -->
+            <router-link to='/gd/sensation' tag='div' :class="current==1?'gdy hover':'gdy'">
+                <div class="gd_bg" >
+                    <img src="../assets/img/gd/anniu.png" style="width: 0.8rem; height: 0.8rem;margin-top: 0.1rem;" alt="">
+                </div>
+            </router-link>
             <div class="gd-btn"></div>
              <template v-if='loginState'>
                 <router-link tag='div' to='/account' :class="current==2?'My hover':'My'">
@@ -61,8 +63,8 @@
            color: #d81d36;
         }
         .gd_bg{
-          background: url(../assets/img/home_xz.png) 0 -0.5rem no-repeat;
-          background-size: 100%;
+            width: 0.4rem;
+            height: 0.4rem;
         }
         .My_bg{
           background: url(../assets/img/home_xz.png) 0 -0.95rem no-repeat;

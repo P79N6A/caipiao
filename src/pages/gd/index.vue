@@ -45,6 +45,7 @@
             <img :src="item.imageUrl" alt="" />
             <p>{{item.nickname}}</p>
           </li> -->
+          
           <li>
               <img src="../../assets/img/gd/more.png" alt="" />
               <p>更多</p>
