@@ -12,13 +12,13 @@ import 'mint-ui/lib/style.css'
 import 'styles/reset.css'
 import $ from 'jquery'
 import infiniteScroll from 'vue-infinite-scroll'
-import {FetchGet, FetchPost} from './fetch/index'
 
 
 
 Vue.config.productionTip = false
 Vue.use(infiniteScroll);
 Vue.use(VueAwesomeSwiper);
+
 Vue.lottery = [
 	[1, "双色球", "", "10", "/ssq/"],
 	[3, "福彩3D", "", "44", "/3d/"],
@@ -63,13 +63,6 @@ Vue.lottery = [
 	[98, "猜冠军", "猜冠军", "", "/guanyajun/guanjun.html"],
 	[99, "猜冠亚军", "猜冠亚军", "", "/guanyajun/guanyajun.html"],
 ]
-
-export default {
-	install(Vue) {
-		Vue.prototype.FetchGet = FetchGet;
-		Vue.prototype.FetchPost = FetchPost;
-	}
-}
 
 //彩种过滤器
 Vue.filter('lotteryCode', function (code,n) {  //时间过滤器

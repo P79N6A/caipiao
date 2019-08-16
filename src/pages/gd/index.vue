@@ -41,14 +41,14 @@
       <!-- 红人导航 -->
       <div class="sensation-bottom">
         <ul>
-          <li v-for="item in redList" :key="item.id">
-            <img src="../../assets/img/gd/hongren.png" alt="" />
-            <p>{{item.title}}</p>
-          </li>
+          <!-- <li v-for="item in redList" :key="item.uid">
+            <img :src="item.imageUrl" alt="" />
+            <p>{{item.nickname}}</p>
+          </li> -->
           <li>
               <img src="../../assets/img/gd/more.png" alt="" />
               <p>更多</p>
-          </li>
+          </li> 
         </ul>
       </div>
     </div>
@@ -76,34 +76,34 @@
           <li class="gditem">
             <div class="introduce">
               <div class="int-l">
-                <img src="../../assets/img/gd/hongren.png" alt="">
+                <img :src="hotList.imageUrl" alt="">
               </div>
               <div class="int-m">
-                <p>大鱼吃小鱼</p>
-                <span>7脸红</span>
+                <p>{{hotList.nickname}}</p>
+                <span>{{hotList.hit_week}}连红</span>
               </div>
               <div class="int-r">
-                <p>16中8</p>
+                <p>{{hotList.allnum}}中{{hotList.hitnum}}</p>
               </div>
             </div>
             <div class="content">
               <div class="con-top">
                 <img src="../../assets/img/foot.png" alt="">
                 <span>预计回报:</span>
-                <span>--倍</span>
+                <span>{{hotList.ireturnrate}}倍</span>
                 <span class="leagues">精选赛事</span>
                 <span>截止</span>
-                <span>08-16&nbsp;9:30</span>
+                <span>{{hotList.cendtime}}</span>
               </div>
-              <p>七连红老手重新回归！近五日8中7，超高命中率，上车，收米。</p>
+              <p>{{hotList.note}}</p>
               <div class="con-bottom">
-                <span>自购<span class="buy">10000</span>元</span>
-                <span class="con-bottom-follow">跟单<span class="buy">10</span>人</span>
+                <span>自购<span class="buy">{{hotList.itmoney}}</span>元</span>
+                <span class="con-bottom-follow">跟单<span class="buy">{{hotList.copycount}}</span>人</span>
                 <input class="btn1" type="button" value="立即跟单">
               </div>
             </div>
           </li>
-          <li class="gditem">
+          <!-- <li class="gditem">
             <div class="introduce">
               <div class="int-l">
                 <img src="../../assets/img/gd/hongren.png" alt="">
@@ -132,67 +132,7 @@
                 <input class="btn1" type="button" value="立即跟单">
               </div>
             </div>
-          </li>
-          <li class="gditem">
-            <div class="introduce">
-              <div class="int-l">
-                <img src="../../assets/img/gd/hongren.png" alt="">
-              </div>
-              <div class="int-m">
-                <p>大鱼吃小鱼</p>
-                <span>7脸红</span>
-              </div>
-              <div class="int-r">
-                <p>16中8</p>
-              </div>
-            </div>
-            <div class="content">
-              <div class="con-top">
-                <img src="../../assets/img/foot.png" alt="">
-                <span>预计回报:</span>
-                <span>--倍</span>
-                <span class="leagues">精选赛事</span>
-                <span>截止</span>
-                <span>08-16&nbsp;9:30</span>
-              </div>
-              <p>七连红老手重新回归！近五日8中7，超高命中率，上车，收米。</p>
-              <div class="con-bottom">
-                <span>自购<span class="buy">10000</span>元</span>
-                <span class="con-bottom-follow">跟单<span class="buy">10</span>人</span>
-                <input class="btn1" type="button" value="立即跟单">
-              </div>
-            </div>
-          </li>
-          <li class="gditem">
-            <div class="introduce">
-              <div class="int-l">
-                <img src="../../assets/img/gd/hongren.png" alt="">
-              </div>
-              <div class="int-m">
-                <p>大鱼吃小鱼</p>
-                <span>7脸红</span>
-              </div>
-              <div class="int-r">
-                <p>16中8</p>
-              </div>
-            </div>
-            <div class="content">
-              <div class="con-top">
-                <img src="../../assets/img/foot.png" alt="">
-                <span>预计回报:</span>
-                <span>--倍</span>
-                <span class="leagues">精选赛事</span>
-                <span>截止</span>
-                <span>08-16&nbsp;9:30</span>
-              </div>
-              <p>七连红老手重新回归！近五日8中7，超高命中率，上车，收米。</p>
-              <div class="con-bottom">
-                <span>自购<span class="buy">10000</span>元</span>
-                <span class="con-bottom-follow">跟单<span class="buy">10</span>人</span>
-                <input class="btn1" type="button" value="立即跟单">
-              </div>
-            </div>
-          </li>
+          </li> -->
 
         </ul>
       </div>
@@ -205,7 +145,7 @@
          @click="backTopAction" />
 
     <!-- 到达底部 -->
-    <div class="loading" v-show="!showLoading">
+    <div class="loading" v-show="showLoading">
       <span>已加载全部数据</span>
     </div>
     <!-- 底部导航 -->
@@ -214,7 +154,8 @@
 </template>
 
 <script>
-  import gdFooter from '@/components/gdFooter'
+  import gdFooter from '@/components/gdFooter';
+  import { sensationList, hotDocmentsList } from '@/request/api';
   export default {
     components: {
       gdFooter
@@ -223,41 +164,16 @@
       return {
         showLoading: false,
         showBack: false,
-        redList: [{
-            title: '放松放松',
-            index: 1
-          },
-          {
-            title: '放松放松',
-            index: 2
-          },
-          {
-            title: '放松放松',
-            index: 3
-          },
-          {
-            title: '放松放松',
-            index: 4
-          },
-          {
-            title: '放松放松',
-            index: 5
-          },
-          {
-            title: '放松放松',
-            index: 6
-          },
-          {
-            title: '放松放松',
-            index: 7
-          }
-        ]
+        redList: [],
+        hotList: []
       }
     },
     methods: {
+      //点击返回顶部
       backTopAction() {
         scrollTo(0, 0);
       },
+      //底部显示无数据
       loadingAction() {
         window.addEventListener('scroll', function(){
         const scrollHeight = document.body.scrollHeight || document.documentElement.scrollHeight;
@@ -269,6 +185,24 @@
         }
         })
       }
+    },
+    created() {
+      //触发底部显示无数据
+      this.loadingAction();
+      //红人数据
+      sensationList().then( res => {
+        this.redList = res
+      }).catch(err => {
+        console.log(err);
+      })
+      //热门跟单数据
+      hotDocmentsList({
+        'fid':'web_jczq_hot_List',
+        'ps':1,
+        'pn':1
+      }).then( res => {
+        this.hotList = res.Resp.rows.row
+      })
     }
   }
 

@@ -132,3 +132,9 @@ export const qqPay = p =>get('/api/phpu/addmoney.phpx',p)
 export const userInfo = p =>post('/api/phpu/q.phpx',p)
 //检测是否登录
 export const checklogin = p =>get('/api/phpu/cl.phpx',p)
+
+//跟单
+//红人数据
+export const sensationList = p => get('/api//cpdata/copy/webRedPersons.json', p)
+//热门跟单列表数据
+export const hotDocmentsList = p => get('/api/phpt/copyJczqs.phpx', p);
