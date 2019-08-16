@@ -4,12 +4,37 @@
       <i class="msg-icon"></i>
       <h1>晒红单</h1>
     </header>
+    <div class="content clearfix">
+      <ul class="clearfix">
+        <li id="article" v-for="item in redbillList" :key="item.uid">
+          <div class="left">
+            <div class="one clearfix">
+              <div class="name">{{item.nickname}}</div>
+              <div class="leader">带红 {{item.copycount}}人</div>
+            </div>
+            <p class="p1">中奖：<span class="sp1">{{item.prizemoney}}</span></p>
+          </div>
+        </li>
+      </ul>
+    </div>
 
   </div>
 </template>
 
 <script>
-
+    import { allSensationList } from '@/request/api'; 
+    export default {
+        data() {
+            return {
+                redbillList: []
+            }
+        },
+        created() {
+            allSensationList().then( res => {
+                this.redbillList = res;
+            })
+        }
+    }
 </script>
 
 <style lang="scss" scoped>
@@ -39,5 +64,76 @@
       background-size: contain;
     }
   }
+
+  .content {
+    width: 7.5rem;
+    box-sizing: border-box;
+    padding: 0.1rem 0.06rem 0 0.1rem;
+    ul{
+        margin-left:0.22rem;
+    }
+    .clearfix {
+        zoom: 1;
+        .left {
+            margin-top: 0.22rem;
+            width: 3.32rem;
+            height: 1.7rem;
+            float: left;
+            border: 2px solid #eeeeee;
+            border-radius: 10px;
+            margin-right: 0.22rem;
+            box-sizing: border-box;
+            padding: 0.25rem 0rem 0.3rem 0rem;
+            .one{
+                height: 0.37rem;
+                margin-left: 0.1rem;
+                .name{
+                    height: 0.37rem;
+                    float: left;
+                    font-size: 0.22rem;
+                    color: #000000;
+                    line-height: 0.37rem;
+                    width: 1.4rem;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+                .leader{
+                    /* width: 1.3rem; */
+                    height: 0.35rem;
+                    background: url('../../assets/img/gd/yuanjiao.png') no-repeat;
+                    background-size: 100% 100%;
+                    float: right;
+                    margin-right: 0.1rem;
+                    font-size: 0.22rem;
+                    color: #ff4d4d;
+                    padding-left: 0.12rem;
+                    /* text-align: center; */
+                    line-height: 0.38rem;
+                    padding-right: 0.1rem;
+                }
+            }
+            .p1{
+                width: 2.83rem;
+                margin-left: 0.24rem;
+                margin-top: 0.45rem;
+                height: 0.3rem;
+                font-size: 0.22rem;
+                color: #999999;
+                .sp1{
+                    line-height: 0.3rem;
+                    font-size: 0.34rem;
+                    color: #d81d36;
+                }
+            }
+        }
+    }
+  }
+  .clearfix:after {
+  content: " ";
+  display: block;
+  clear: both;
+  height: 0;
+}
 
 </style>
