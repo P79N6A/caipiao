@@ -17,8 +17,9 @@
               <span>{{item.nickname}}</span><span><i>{{item.allnum}}</i>中<i>{{item.hitnum}}</i></span></p>
             <span class="org">近7日盈利率：<i class="red">{{item.profit}}%</i></span>
           </div>
+          <div v-if="item.canCopyNum > 0">
           <input type="button" id="btn1" value="跟单" />
-          <span class="cirl">1</span>
+          <span class="cirl">1</span></div>
         </div>
       </li>
     </ul>

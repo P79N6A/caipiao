@@ -22,7 +22,7 @@
 </template>
 
 <script>
-    import { allSensationList } from '@/request/api'; 
+    import { showRedbillList } from '@/request/api'; 
     export default {
         data() {
             return {
@@ -35,7 +35,7 @@
           }
         },
         created() {
-            allSensationList().then( res => {
+          showRedbillList().then( res => {
                 this.redbillList = res;
             })
         }

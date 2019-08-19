@@ -12,12 +12,13 @@ import 'mint-ui/lib/style.css'
 import 'styles/reset.css'
 import $ from 'jquery'
 import infiniteScroll from 'vue-infinite-scroll'
-
-
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.config.productionTip = false
 Vue.use(infiniteScroll);
 Vue.use(VueAwesomeSwiper);
+Vue.use(ElementUI)
 
 Vue.lottery = [
 	[1, "双色球", "", "10", "/ssq/"],

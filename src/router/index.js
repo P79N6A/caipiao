@@ -278,23 +278,32 @@ const router = new Router({
     {
       path: '/gd',
       name: 'gd',
-      component: () => import('@/pages/gd/profit'),
+      component: () => import('@/pages/gd/index'),
       children: [{
-        path: 'gd/search',
-        component: () => import('@/pages/gd/search')
-      },
-      {
-        path: 'gd/sensation',
-        component: () => import('@/pages/gd/sensation')
-      },
-      {
-        path: 'gd/redbill',
-        component: () => import('@/pages/gd/redbill')
-      },
-      {
-        path: 'gd/profit',
-        component: () => import('@/pages/gd/profit')
-      }]
+          path: '',
+          component: () => import('@/pages/gd/gdfd')
+        },
+        {
+          path: 'search',
+          component: () => import('@/pages/gd/search')
+        },
+        {
+          path: 'sensation',
+          component: () => import('@/pages/gd/sensation')
+        },
+        {
+          path: 'redbill',
+          component: () => import('@/pages/gd/redbill')
+        },
+        {
+          path: 'profit',
+          component: () => import('@/pages/gd/profit')
+        },
+        {
+          path: 'wdzj',
+          component: () => import('@/pages/gd/wdzj')
+        },
+      ]
     }
   ],
   //进入页面就到定点到顶点

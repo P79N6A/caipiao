@@ -3,11 +3,13 @@
     <header class="header">
       <span class="msg-icon" @click="backAction"></span>
       <nav class="title">
-        <h1 class="active">命中榜</h1>
-        <h1>盈利榜</h1>
+        <h1 class="active" @click="hitAction">命中榜</h1>
+        <h1 @click="returnAction">盈利榜</h1>
       </nav>
     </header>
-    <div>
+    <hit-user v-if="showHit" />
+    <return-user v-if="showReturn" />
+    <!-- <div>
       <ul>
         <li class="list" v-for="item in profitList" :key="item.uid">
           <div class="list_t clearfix">
@@ -25,22 +27,34 @@
           </div>
         </li>
       </ul>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
     import { hotprofitList } from '@/request/api';
-
+    import  hitUser  from  './components/hituserlist';
+    import  returnUser  from  './components/returnuserlist';
   export default {
     data() {
       return {
-        profitList: []
+        profitList: [],
+        showHit: true,
+        showReturn: false
       }
     },
+    components:{hitUser, returnUser},
     methods: {
       backAction() {
         this.$router.go(-1);
+      },
+      hitAction() {
+        this.showHit = !this.showHit
+        this.showReturn = !this.showReturn
+      },
+      returnAction() {
+        this.showHit = !this.showHit
+        this.showReturn = !this.showReturn
       }
     },
     created() {

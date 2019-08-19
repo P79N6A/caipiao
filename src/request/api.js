@@ -139,8 +139,12 @@ export const sensationList = p => get('/api//cpdata/copy/webRedPersons.json', p)
 //热门跟单列表
 export const hotDocmentsList = p => get('/api/phpt/copyJczqs.phpx', p);
 //全部红人
-export const allSensationList = p => get('/api//cpdata/copy/webHighBonus.json', p);
+export const allSensationList = p => get('/api/cpdata/copy/webRedPersonList.json', p);
+//晒红单
+export const showRedbillList = p => get('/api/cpdata/copy/webHighBonus.json', p);
 //热门榜单
-export const hotprofitList = p => get('/api//cpdata/phot/31/webHitWeekUserList.json', p);
-
+export const hotprofitList = p => get('/api/cpdata/phot/31/webHitWeekUserList.json', p);
+export const hotprofitReturnList = p => get('/api/cpdata/phot/31/webReturnWeekUserList.json', p);
+//我的战绩
+export const myrecord = p => get('/apiphpu/webfollowDetail.phpx', p);
 
