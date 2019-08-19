@@ -11,8 +11,10 @@
     <nav class="nav">
       <ul>
         <li>
-          <div class="recommend"></div>
-          <p>牛人推荐</p>
+          <router-link to="/gd/recommend">
+            <div class="recommend"></div>
+            <p>牛人推荐</p>
+          </router-link>
         </li>
         <li>
           <router-link to="/gd/profit">
@@ -48,11 +50,12 @@
       <!-- 红人导航 -->
       <div class="sensation-bottom">
         <ul>
-          <!-- <li v-for="item in redList" :key="item.uid">
-            <img :src="item.imageUrl" alt="" />
-            <p>{{item.nickname}}</p>
-          </li> -->
-
+          <router-link to="/gd/originator">
+            <li v-for="item in redList" :key="item.uid">
+              <img :src="item.imageUrl" alt="" />
+              <p>{{item.nickname}}</p>
+            </li>
+          </router-link>
           <li>
             <router-link to="/gd/sensation">
               <img src="../../assets/img/gd/more.png" alt="" />

@@ -146,5 +146,11 @@ export const showRedbillList = p => get('/api/cpdata/copy/webHighBonus.json', p)
 export const hotprofitList = p => get('/api/cpdata/phot/31/webHitWeekUserList.json', p);
 export const hotprofitReturnList = p => get('/api/cpdata/phot/31/webReturnWeekUserList.json', p);
 //我的战绩
-export const myrecord = p => get('/apiphpu/webfollowDetail.phpx', p);
+export const myrecord = p => get('/api/phpu/webfollowDetail.phpx', p);
+//牛人推荐
+export const recommendList = p => get('/api/cpdata/copy/webNiuRens.json', p);
+//发单人详情
+export const followDetail = p => post('/api/phpu/webfollowDetail.phpx', p);
+
+
 

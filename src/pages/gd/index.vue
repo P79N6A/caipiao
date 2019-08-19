@@ -1,5 +1,5 @@
 <template>
-	<div class="loginBox">
+	<div class="gdBox">
 		<router-view></router-view>
 	</div>	
 </template>

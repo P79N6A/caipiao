@@ -288,6 +288,10 @@ const router = new Router({
           component: () => import('@/pages/gd/search')
         },
         {
+          path: 'recommend',
+          component: () => import('@/pages/gd/recommend')
+        },
+        {
           path: 'sensation',
           component: () => import('@/pages/gd/sensation')
         },
@@ -302,7 +306,10 @@ const router = new Router({
         {
           path: 'wdzj',
           component: () => import('@/pages/gd/wdzj')
-        },
+        },{
+          path: 'originator',
+          component: () => import('@/pages/gd/originator')
+        }
       ]
     }
   ],

@@ -55,14 +55,14 @@
         </ul>
       </div>
     </div>
-    <bottomNav/>
+    <recordBottom/>
   </div>
 </template>
 
 <script>
-    import bottomNav from './components/myRecordBottom'
+  import recordBottom from './components/myRecordBottom' 
   export default {
-    components: { bottomNav },
+    components: {recordBottom},
     methods: {
         backAction() {
             this.$router.go(-1);

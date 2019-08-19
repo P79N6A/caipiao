@@ -7,6 +7,7 @@
 
         <router-link to='/gd/search'>
           <span class="search"> </span>
+          <!-- <img class="search" src="../../../assets/img/gd/search.png" alt=""/> -->
         </router-link>
 
       </div>
