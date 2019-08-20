@@ -14,11 +14,17 @@ import $ from 'jquery'
 import infiniteScroll from 'vue-infinite-scroll'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-
+import Vant from 'vant';
+import 'vant/lib/index.css';
+//import { Search } from 'mint-ui';
 Vue.config.productionTip = false
 Vue.use(infiniteScroll);
 Vue.use(VueAwesomeSwiper);
 Vue.use(ElementUI)
+Vue.use(Vant);
+import { Search } from 'vant';
+Vue.use(Search);	
+//Vue.component(Search.name, Search);
 
 Vue.lottery = [
 	[1, "双色球", "", "10", "/ssq/"],

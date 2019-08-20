@@ -89,9 +89,6 @@
     followDetail,followUserDetail
   } from '@/request/api';
   export default {
-    components: {
-      originatorBottom
-    },
     data() {
       return {
         deailList: [],

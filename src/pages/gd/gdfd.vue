@@ -4,7 +4,9 @@
     <!-- 头部 -->
     <header class="header">
       <h1>复制跟单</h1>
-      <i class="msg-icon"></i>
+      <router-link to="/help/fzgdNew27">
+        <i class="msg-icon"></i>
+      </router-link>
     </header>
 
     <!-- 导航 -->
@@ -78,7 +80,7 @@
       <span>已加载全部数据</span>
     </div>
     <!-- 底部导航 -->
-    <gd-footer></gd-footer>
+    <gd-footer :loginState='loginState' current='0'></gd-footer>
   </div>
 </template>
 
@@ -88,7 +90,8 @@
   import gdFollowList from './components/gdFollowList';
   import {
     sensationList,
-    hotDocmentsList
+    hotDocmentsList,
+    checklogin
   } from '@/request/api';
   export default {
     components: {
@@ -101,7 +104,8 @@
         showLoading: false,
         showBack: false,
         redList: [],
-        hotList: []
+        hotList: [],
+        loginState:false
       }
     },
     methods: {
@@ -133,12 +137,21 @@
       })
       //热门跟单数据
       hotDocmentsList({
-        'fid': 'web_jczq_hot_List',
         'ps': 10,
         'pn': 1
       }).then(res => {
         this.hotList = res.Resp.rows.row
+        console.log(this.hotList  )
       })
+      //登录
+      checklogin().then(res => {
+            const code = res.Resp.code;
+            if (code === 0 ) {
+                this.loginState = true
+            }else{
+                this.loginState = false
+            }
+        })
     }
   }
 
@@ -250,9 +263,8 @@
 
     .sensation-bottom {
       ul {
-        margin: 0;
         height: 3.56rem;
-        padding: 0.31rem 0.26rem;
+        padding: 0.5rem 0 0 .5rem;
         border-bottom: 0.2rem solid #f2f2f2;
 
         li {

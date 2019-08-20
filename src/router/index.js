@@ -211,8 +211,8 @@ const router = new Router({
           component: () => import('@/pages/help/app'),
         },
         {
-          path: 'gid01',
-          component: () => import('@/pages/help/gid01')
+          path: 'fzgdNew27',
+          component: () => import('@/pages/help/fzgdNew27')
         },
         {
           path: 'gid50',
@@ -278,14 +278,14 @@ const router = new Router({
     {
       path: '/gd',
       name: 'gd',
-      component: () => import('@/pages/gd/index'),
+      component: () => import('@/pages/gd/gdxq'),
       children: [{
           path: '',
           component: () => import('@/pages/gd/gdfd')
         },
         {
           path: 'search',
-          component: () => import('@/pages/gd/search')
+          component: () => import('@/pages/gd/searchCom')
         },
         {
           path: 'recommend',
@@ -306,9 +306,14 @@ const router = new Router({
         {
           path: 'wdzj',
           component: () => import('@/pages/gd/wdzj')
-        },{
+        },
+        {
           path: 'originator',
           component: () => import('@/pages/gd/originator')
+        },
+        {
+          path: 'gdxq',
+          component: () => import('@/pages/gd/gdxq')
         }
       ]
     }
