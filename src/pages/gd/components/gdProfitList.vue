@@ -22,7 +22,7 @@
         <li class="gditem">
           <div class="introduce">
             <div class="int-l">
-              <img :src="hotList.imageUrl" alt="">
+              <img :src="'/api'+hotList.imageUrl" alt="">
             </div>
             <div class="int-m">
               <p>{{hotList.nickname}}</p>

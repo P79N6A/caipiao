@@ -10,14 +10,14 @@
       <div class='info'>
         <div class='logo'>
         </div>
-        <p class='name'>圣诞节粉丝</p>
+        <p class='name'>{{infList.cnickname}}</p>
         <p class='desc'>
-          <span class='fans'>粉丝:0</span>
-          <span class='att'>关注:0</span>
+          <span class='fans'>粉丝:{{infList.ifoucsnum}}</span>
+          <span class='att'>关注:{{infList.fsum}}</span>
         </p>
         <p class='money clearfix'>
-          <span style='float: left'>累计发单中奖：<span class='yellow fd'>0</span>元</span>
-          <span style='float: right'>累计跟单中奖：<span class='yellow zj'>0</span>元</span>
+          <span style='float: left'>累计发单中奖：<span class='yellow fd'>{{infList.icopyaward}}</span>元</span>
+          <span style='float: right'>累计跟单中奖：<span class='yellow zj'>{{infList.iaward}}</span>元</span>
         </p>
       </div>
     </div>
@@ -31,15 +31,15 @@
             </div> -->
         <ul class='res'>
           <li>
-            <p class='red week'>13%</p>
+            <p class='red week'>{{infList.avgreturn}}%</p>
             <p>7日盈利</p>
           </li>
           <li>
-            <p class='red month'>34%</p>
+            <p class='red month'>{{infList.avgreturnmonth}}%</p>
             <p>30日盈利</p>
           </li>
           <li>
-            <p class='red hit'>8中4</p>
+            <p class='red hit'>{{infList.allnum}}中{{infList.hitnum}}</p>
             <p>7日命中</p>
           </li>
         </ul>
@@ -61,12 +61,25 @@
 
 <script>
   import recordBottom from './components/myRecordBottom' 
+  import { myrecord } from '@/request/api'
   export default {
     components: {recordBottom},
+    data() {
+      return {
+        infList: []
+      }
+    },
     methods: {
         backAction() {
             this.$router.go(-1);
         }
+    },
+    created() {
+      myrecord().then( res => {
+        this.infList = res.Resp.row;
+        console.log(this.infList)
+      })
+      
     }
   }
 

@@ -51,8 +51,8 @@
       <div class="sensation-bottom">
         <ul>
           <router-link to="/gd/originator">
-            <li v-for="item in redList" :key="item.uid">
-              <img :src="item.imageUrl" alt="" />
+            <li v-for="(item, index) in redList.slice(0,7)" :key="item.uid">
+              <img :src="'/api'+item.imageUrl" alt="" />
               <p>{{item.nickname}}</p>
             </li>
           </router-link>
@@ -134,7 +134,7 @@
       //热门跟单数据
       hotDocmentsList({
         'fid': 'web_jczq_hot_List',
-        'ps': 1,
+        'ps': 10,
         'pn': 1
       }).then(res => {
         this.hotList = res.Resp.rows.row

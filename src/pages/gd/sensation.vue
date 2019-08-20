@@ -9,7 +9,7 @@
       <li class="list" v-for="item in allList" :key="item.uid">
         <div class="list_t clearfix">
           <div id="content_l">
-            <img :src="item.imageUrl" />
+            <img :src="'/api'+item.imageUrl" />
             <span class="crow"></span>
           </div>
           <div id="content_l1">

@@ -27,6 +27,30 @@
   </div>
 </template>
 
+<script>
+    import { followUserDetail } from '@/request/api';
+    export default {
+      data() {
+          return {
+              userList: []
+          }
+      },
+      methods: {
+        backAction() {
+          this.$router.go(-1);
+        }
+      },
+      created() {
+        followUserDetail({
+          'ps': 10
+        }).then( res => {
+              this.userList = res.Resp.rows
+              console.log(this.userList)
+          })
+      }
+    }
+  </script>  
+
 <style lang="scss" scoped>
   .infos {
     /*height:10rem;*/

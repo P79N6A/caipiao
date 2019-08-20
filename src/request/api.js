@@ -151,6 +151,8 @@ export const myrecord = p => get('/api/phpu/webfollowDetail.phpx', p);
 export const recommendList = p => get('/api/cpdata/copy/webNiuRens.json', p);
 //发单人详情
 export const followDetail = p => post('/api/phpu/webfollowDetail.phpx', p);
+//发单人详情关注列表
+export const followUserDetail = p => post('/api/phpu/webfollowUserLists.phpx', p);
 
 
 
