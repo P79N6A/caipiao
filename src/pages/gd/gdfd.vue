@@ -137,15 +137,16 @@
       })
       //热门跟单数据
       hotDocmentsList({
+        'fid': 'web_jczq_hot_List',
         'ps': 10,
         'pn': 1
       }).then(res => {
         this.hotList = res.Resp.rows.row
-        console.log(this.hotList  )
       })
       //登录
       checklogin().then(res => {
             const code = res.Resp.code;
+            console.log(code)
             if (code === 0 ) {
                 this.loginState = true
             }else{

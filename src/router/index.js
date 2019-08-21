@@ -278,7 +278,7 @@ const router = new Router({
     {
       path: '/gd',
       name: 'gd',
-      component: () => import('@/pages/gd/gdxq'),
+      component: () => import('@/pages/gd/index'),
       children: [{
           path: '',
           component: () => import('@/pages/gd/gdfd')

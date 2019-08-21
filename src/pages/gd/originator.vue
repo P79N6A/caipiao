@@ -55,6 +55,8 @@
     <div class="bottom">
       <div class="infos">
         <ul class="every">
+            <router-link to='/gd/gdxq'>
+
           <li class="gditem" data-gid="70" data-projid="CP70150747454" data-iupload="1">
             <div class="aticle">
               <div class="aticle_t"><img src="img/zuqiu.png"><span>英超</span><span class="jiezhi">截止</span><span
@@ -77,6 +79,7 @@
               </div>
             </div>
           </li>
+          </router-link>
         </ul>
       </div>
 
@@ -86,7 +89,9 @@
 
 <script>
   import {
-    followDetail,followUserDetail
+    followDetail,
+    followUserDetail,
+    checklogin
   } from '@/request/api';
   export default {
     data() {
@@ -101,15 +106,15 @@
       }
     },
     created() {
+      //用户详情
       followDetail().then(res => {
-        this.deailList = res.Resp.row
-      }),
-      followUserDetail({
-          'ps': 10
-        }).then( res => {
-              this.userList = res.Resp.rows
-              console.log(this.userList)
-          })
+          this.deailList = res.Resp.row
+        }),
+        //跟单详情
+        followUserDetail().then(res => {
+          //this.userList = res.Resp.rows
+          console.log(res)
+        })
     }
   }
 

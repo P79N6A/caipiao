@@ -19,6 +19,7 @@
     <!-- 跟单列表 -->
     <div class="hot-bottom">
       <ul>
+        <router-link to='/gd/gdxq'>
         <li class="gditem">
           <div class="introduce">
             <div class="int-l">
@@ -48,7 +49,7 @@
               <input class="btn1" type="button" value="立即跟单">
             </div>
           </div>
-        </li>
+        </li></router-link>
       </ul>
     </div>
   </div>

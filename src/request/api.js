@@ -137,7 +137,7 @@ export const checklogin = p =>get('/api/phpu/cl.phpx',p)
 //红人
 export const sensationList = p => get('/api//cpdata/copy/webRedPersons.json', p)
 //热门跟单列表
-export const hotDocmentsList = p => get('/api/phpt/copyJczqs.phpx', p);
+export const hotDocmentsList = p => post('/api/phpt/copyJczqs.phpx', p);
 //全部红人
 export const allSensationList = p => get('/api/cpdata/copy/webRedPersonList.json', p);
 //晒红单
@@ -153,6 +153,8 @@ export const recommendList = p => get('/api/cpdata/copy/webNiuRens.json', p);
 export const followDetail = p => post('/api/phpu/webfollowDetail.phpx', p);
 //发单人详情关注列表
 export const followUserDetail = p => post('/api/phpu/webfollowUserLists.phpx', p);
+//跟单详情
+export const copyDetail = p => post('/api/phpt/copyDetail.phpx', p);
 
 
 
