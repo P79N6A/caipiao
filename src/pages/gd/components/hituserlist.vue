@@ -1,22 +1,24 @@
 <template>
   <div class="hituserlist">
     <ul>
-      <li class="list" v-for="item in profitList" :key="item.uid">
-        <div class="list_t clearfix">
-          <div id="content_l">
-            <img :src="'/api'+item.imageUrl" />
-            <span class="crow"></span>
+      <router-link to="/gd/originator">
+        <li class="list" v-for="item in profitList" :key="item.uid">
+          <div class="list_t clearfix">
+            <div id="content_l">
+              <img :src="'/api'+item.imageUrl" />
+              <span class="crow" v-if="item.ishot != 0"></span>
+            </div>
+            <div id="content_l1">
+              <p class="clearfix">
+                <span>{{item.nickname}}</span></p>
+              <span class="org">近7日命中数 ：<i class="red">{{item.allnum}}中{{item.hitnum}}</i></span>
+            </div>
+            <div v-if="item.canCopyNum > 0">
+              <input type="button" id="btn1" value="跟单" />
+              <span class="cirl">1</span></div>
           </div>
-          <div id="content_l1">
-            <p class="clearfix">
-              <span>{{item.nickname}}</span></p>
-            <span class="org">近7日命中数 ：<i class="red">{{item.allnum}}中{{item.hitnum}}</i></span>
-          </div>
-          <div v-if="item.canCopyNum > 0">
-          <input type="button" id="btn1" value="跟单" />
-          <span class="cirl">1</span></div>
-        </div>
-      </li>
+        </li>
+      </router-link>
     </ul>
   </div>
 

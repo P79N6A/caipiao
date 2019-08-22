@@ -9,6 +9,7 @@
       <!-- 用户信息 -->
       <div class='info'>
         <div class='logo'>
+          <img :src="'/api'+deailList.imageUrl" alt="">
         </div>
         <p class='name'>{{deailList.cnickname}}</p>
         <p class='desc'>
@@ -51,38 +52,52 @@
         </ul>
       </div>
     </div>
-    <!-- <originatorBottom/> -->
-    <div class="bottom">
+    <!-- 列表 -->
+    <div class="list-wrap">
       <div class="infos">
         <ul class="every">
-            <router-link to='/gd/gdxq'>
-
-          <li class="gditem" data-gid="70" data-projid="CP70150747454" data-iupload="1">
-            <div class="aticle">
-              <div class="aticle_t"><img src="img/zuqiu.png"><span>英超</span><span class="jiezhi">截止</span><span
-                  class="shijian">08-19 21:45</span></div>
-              <div class="aticle_z">跟单有惊喜，躺赢狂收米，快来跟我单，中奖不错过</div>
-              <div class="aticle_x">
-                <div class="div1">
-                  <p>1.52<span>倍</span></p>
-                  <p>预计回报</p>
+          <router-link to='/gd/gdxq'>
+            <li class="gditem" data-gid="70" data-projid="CP70150747454" data-iupload="1" v-for="item in userList"
+              :key="item.projid">
+              <div class="aticle">
+                <div class="aticle_t"><img src="../../assets/img/gd/zuqiu.png"><span>{{item.league}}</span><span
+                    class="jiezhi">截止</span><span class="shijian">{{item.cendtime}}</span></div>
+                <div class="aticle_z">{{item.note}}</div>
+                <div class="aticle_x">
+                  <div class="div1">
+                    <p>1.52<span>倍</span></p>
+                    <p>预计回报</p>
+                  </div>
+                  <div class="div2">
+                    <p>{{item.money}}<span>元</span></p>
+                    <p>自购金额</p>
+                  </div>
+                  <div class="div3">
+                    <p>{{item.canCopyNum}}<span>人</span></p>
+                    <p>跟单人数</p>
+                  </div>
+                  <p v-if="item.isover != 0" class="ykj_2">
+                    <span>¥{{item.winMoney}}</span>
+                  </p>
+                  <input v-if="item.isover == 0" type="button" class="btn1" id="btn1" value="立即跟单">
                 </div>
-                <div class="div2">
-                  <p>200<span>元</span></p>
-                  <p>自购金额</p>
-                </div>
-                <div class="div3">
-                  <p>0<span>人</span></p>
-                  <p>跟单人数</p>
-                </div>
-                <input type="button" class="btn1" id="btn1" value="立即跟单">
               </div>
-            </div>
-          </li>
+            </li>
           </router-link>
         </ul>
       </div>
 
+    </div>
+    <!-- 底部 -->
+    <div class="bottom">
+      <div class="foot_left">
+        <img src="../../assets/img/gd/fot3.png" />
+        <span class="guanzhu red">关注</span>
+      </div>
+      <div class="foot_right">
+        <img src="../../assets/img/gd/fot4.png" />
+        <span class="dzgd">定制跟单</span>
+      </div>
     </div>
   </div>
 </template>
@@ -91,13 +106,14 @@
   import {
     followDetail,
     followUserDetail,
-    checklogin
+    userInfo
   } from '@/request/api';
   export default {
     data() {
       return {
         deailList: [],
-        userList: []
+        userList: [],
+        userInfo: new Object()
       }
     },
     methods: {
@@ -107,13 +123,23 @@
     },
     created() {
       //用户详情
-      followDetail().then(res => {
+      userInfo({
+        "fid": "u_ainfo"
+      }).then(res => {
+        console.log(res)
+      })
+      followDetail({
+          'owner': 13047662,
+        }).then(res => {
           this.deailList = res.Resp.row
         }),
         //跟单详情
-        followUserDetail().then(res => {
-          //this.userList = res.Resp.rows
-          console.log(res)
+        followUserDetail({
+          'owner': 13047662,
+          'pn': 1
+        }).then(res => {
+          this.userList = res.Resp.rows.row
+          //console.log(res)
         })
     }
   }
@@ -123,7 +149,7 @@
 <style lang="scss" scoped>
   .top {
     width: 100%;
-    height: 6.15rem;
+    height: 5rem;
     display: block;
     background: url('../../assets/img/1.jpg') no-repeat;
     background-size: 100% 6.15rem;
@@ -132,9 +158,11 @@
     .header {
       width: 100%;
       height: .88rem;
-      position: relative;
       top: 0;
       bottom: 0;
+      position: fixed;
+      z-index: 100000;
+      /* opacity: 0.4; */
 
       h1 {
         line-height: .88rem;
@@ -170,9 +198,9 @@
         margin-left: 3.2rem;
         margin-top: 1.2rem;
         overflow: hidden;
-        background: url('../../assets/img/gd/hongren.png') no-repeat;
+        /* background: url('../../assets/img/gd/hongren.png') no-repeat;
         background-size: 110%;
-        background-position: center;
+        background-position: center; */
       }
 
       .name {
@@ -340,7 +368,9 @@
     }
   }
 
-  .bottom {
+  .list-wrap {
+    margin-bottom: 1rem;
+
     .infos {
       /*height:10rem;*/
       width: 100%;
@@ -449,6 +479,26 @@
               margin-left: 0rem;
             }
 
+            .ykj_2 {
+              display: block;
+              position: absolute;
+              right: 0.5rem;
+              bottom: 0.35rem;
+              width: 1.34rem;
+              height: 1.08rem;
+              background: url('../../assets/img/gd/prize.png') no-repeat;
+              background-size: 100%;
+
+              span {
+                font-size: 0.27rem;
+                color: #d81d36;
+                line-height: 1.08rem;
+                display: block;
+                transform: rotate(15deg);
+                text-align: center;
+              }
+            }
+
             #btn1 {
               width: 1.74rem;
               height: 0.48rem;
@@ -464,6 +514,68 @@
       }
     }
 
+  }
+
+  .bottom {
+    display: block;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    height: 0.65rem;
+    padding: 0.14rem 0;
+    border-top: 1px solid #cccccc;
+    background-color: #f5f5f5;
+    z-index: 9999;
+
+    .foot_left {
+      display: block;
+      width: 3.75rem;
+      height: 0.65rem;
+      float: left;
+      border-right: 1px solid #cccccc;
+
+      img {
+        width: 0.41rem;
+        height: 0.43rem;
+        display: block;
+        float: left;
+        margin-left: 1.25rem;
+        margin-top: 0.1rem;
+      }
+
+      .guanzhu {
+        font-size: 0.32rem;
+        display: block;
+        float: left;
+        line-height: 0.65rem;
+        margin-left: 0.27rem;
+      }
+    }
+
+    .foot_right {
+      display: block;
+      width: 3.72rem;
+      height: 0.65rem;
+      float: left;
+
+      img {
+        width: 0.35rem;
+        height: 0.43rem;
+        display: block;
+        float: left;
+        margin-left: 1.25rem;
+        margin-top: 0.1rem;
+      }
+
+      .dzgd {
+        font-size: 0.32rem;
+        color: #666666;
+        display: block;
+        float: left;
+        line-height: 0.65rem;
+        margin-left: 0.27rem;
+      }
+    }
   }
 
 </style>

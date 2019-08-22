@@ -6,6 +6,7 @@
     </header>
     <div class="content clearfix">
       <ul class="clearfix">
+        <router-link to="/gd/gdxq">
         <li id="article" v-for="item in redbillList" :key="item.uid">
           <div class="left">
             <div class="one clearfix">
@@ -15,6 +16,7 @@
             <p class="p1">中奖：<span class="sp1">{{item.prizemoney}}</span></p>
           </div>
         </li>
+      </router-link>
       </ul>
     </div>
 

@@ -1,19 +1,21 @@
 <template>
   <div class="returnuserlist">
     <ul>
-      <li class="list" v-for="item in returnList" :key="item.uid">
-        <div class="list_t clearfix">
-          <div id="content_l">
-            <img :src="'/api'+item.imageUrl" />
-            <span class="crow"></span>
+      <router-link to="/gd/originator">
+        <li class="list" v-for="item in returnList" :key="item.uid">
+          <div class="list_t clearfix">
+            <div id="content_l">
+              <img :src="'/api'+item.imageUrl" />
+              <span class="crow"></span>
+            </div>
+            <div id="content_l1">
+              <p class="clearfix">
+                <span>{{item.nickname}}</span></p>
+              <span class="org">近7日盈利率 ：<i class="red">{{item.avg_return}}%</i></span>
+            </div>
           </div>
-          <div id="content_l1">
-            <p class="clearfix">
-              <span>{{item.nickname}}</span></p>
-            <span class="org">近7日盈利率 ：<i class="red">{{item.avg_return}}%</i></span>
-          </div>
-        </div>
-      </li>
+        </li>
+      </router-link>
     </ul>
   </div>
 

@@ -3,17 +3,25 @@
     <header class="header">
       <span class="msg-icon" @click="backAction"></span>
       <nav class="title">
-        <ul>
+          <el-tabs class="box" v-model="activeName">
+              <el-tab-pane class="hit" label="命中榜" name="first">
+                  <hit-user />
+              </el-tab-pane>
+              <el-tab-pane class="return" label="盈利榜" name="second">
+                  <return-user />
+              </el-tab-pane>
+            </el-tabs>
+        <!-- <ul>
           <li v-for="(item, index) in titleList" @click="changeIndex(index);" :class="{active: selectIndex===index}">
             {{item.title}}
           </li>
-        </ul>
+        </ul> -->
         <!-- <h1 class="active" @click="hitAction">命中榜</h1>
         <h1 @click="returnAction">盈利榜</h1> -->
       </nav>
     </header>
-    <hit-user />
-    <return-user />
+    <!-- <hit-user /> -->
+    <!-- <return-user /> -->
     <!-- <div>
       <ul>
         <li class="list" v-for="item in profitList" :key="item.uid">
@@ -53,7 +61,8 @@
         profitList: [],
         showHit: true,
         showReturn: false,
-        selectIndex: 0
+        selectIndex: 0,
+        activeName: 'first'
       }
     },
     components: {
@@ -62,7 +71,7 @@
     },
     methods: {
       backAction() {
-        this.$router.go(-1);
+        this.$router.push('gd');
       },
       changeIndex(index) {
         this.selectIndex = index;
@@ -98,7 +107,7 @@
     }
 
     .title {
-      width: 3.6rem;
+      width: 100%;
       margin: 0 auto;
       height: 100%;
       ul {
@@ -247,4 +256,52 @@
 
   }
 
+</style>
+
+<style lang="scss">
+  .el-tabs__header {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    position: relative;
+    margin-bottom: 0.1rem;
+  }
+  /* .el-tabs__nav-wrap {
+    overflow: hidden;
+    height: 100%;
+    margin-bottom: 0;
+    position: relative;
+} */
+  /* .el-tabs__nav-scroll{
+    overflow: hidden;
+  } */
+  .el-tabs__active-bar{
+    background-color: #d81d36;
+    /* margin: 0 .5rem; */
+  }
+  
+  .el-tabs__nav{
+    height: 100%;
+    margin-left: 2rem;
+  }
+  /* .el-tabs, .box, .el-tabs--top {
+    width: 100%;
+  } */
+  .el-tabs__item{
+    color: #999;
+    font-size: 0.38rem;
+    font-family: '宋体';
+    font-weight: 700;
+    text-align: center;
+    line-height: 0.88rem;
+    /* margin-left: 1.16rem; */
+  }
+  .el-tabs__item.is-active{
+    color: #000;
+    /* margin-right: .2rem; */
+    height: 100%;
+  } 
+  .el-tabs__nav-wrap::after{
+    background-color: #fff;
+  }
 </style>

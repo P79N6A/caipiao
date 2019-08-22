@@ -83,6 +83,7 @@
 
 <style lang="scss" scoped>
   .hot {
+    margin-bottom: 1rem;
     .hot-top {
       width: 100%;
       height: 0.92rem;

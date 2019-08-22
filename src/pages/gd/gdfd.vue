@@ -137,7 +137,7 @@
       })
       //热门跟单数据
       hotDocmentsList({
-        'fid': 'web_jczq_hot_List',
+        'fid': 'web_jczqList',
         'ps': 10,
         'pn': 1
       }).then(res => {
