@@ -113,12 +113,13 @@
       return {
         deailList: [],
         userList: [],
+        userUid: '',
         userInfo: new Object()
       }
     },
     methods: {
       backAction() {
-        this.$router.go(-1);
+        this.$router.push('/gd');
       }
     },
     created() {
@@ -126,11 +127,13 @@
       userInfo({
         "fid": "u_ainfo"
       }).then(res => {
-        console.log(res)
+        //console.log(res)
+        this.userUid = res.Resp.row.userid
       })
       followDetail({
-          'owner': 13047662,
+          'owner': 12501549
         }).then(res => {
+          console.log(res)
           this.deailList = res.Resp.row
         }),
         //跟单详情

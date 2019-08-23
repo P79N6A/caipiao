@@ -46,32 +46,69 @@
     </section>
 
     <nav class="title">
-      <ul>
-        <li v-for="(item, index) in titleList" @click="changeIndex(index);" :class="{active: selectIndex===index}">
-          {{item}}
-        </li>
-      </ul>
+      <el-tabs class="box" v-model="activeName" @tab-click="handleClick">
+        <el-tab-pane class="follow" label="方案详情" name="first">
+        </el-tab-pane>
+        <el-tab-pane class="customized" label="跟单用户" name="second">
+        </el-tab-pane>
+      </el-tabs>
+
     </nav>
 
-    <div class="buy">
+    <!-- <div class="buy">
       <ul>
         <li v-for="value in numList">{{value}}</li>
       </ul>
-    </div>
+    </div> -->
+
+    <footer class="footer-wrap">
+      <ul class='clearfix num'>
+        <li v-for="(value, index) in numList" @click="chooseAction(index)">{{value}}
+          <span class="choose" v-show="index !== i">
+            <img src="../../assets/img/gd/chechicon.png" alt="">
+          </span>
+        </li>
+
+      </ul>
+      <!-- <div class='clearfix foot'>
+          <input type="button" value='-' class='substract' name="">
+          <input type="number"  style="display: none;"/>
+          <input type="number" value='5' name="" class='val'>
+          <input type="button"  value='+' class='add' name="">
+          <div>
+              共<s>10元</s>
+          </div>
+          <div class='followMe' >立即预约</div>
+      </div> -->
+      <!-- <el-input-number size="mini" v-model="num"></el-input-number> -->
+      <div class="down" id="myDown" v-show="showFooter">
+        <span class="close" id="close" @click="closeAction">X</span>
+        <img src="../../assets/img/gd/lottery_icon.png">
+        <h4>盈球体育</h4>
+        <p>最值得信赖的购彩平台</p>
+        <span class="dl-btn">立即下载</span>
+      </div>
+    </footer>
 
 
   </div>
 </template>
 
 <script>
-  import { copyDetail } from '@/request/api'
+  import {
+    copyDetail
+  } from '@/request/api'
   export default {
     data() {
       return {
-        titleList: ['方案详情', '跟单用户'],
         numList: ['10倍', '20倍', '50倍', '100倍'],
         selectIndex: 0,
-        copyDetailList: []
+        copyDetailList: [],
+        showFooter: true,
+        showChoose: false,
+        num: 5,
+        i: -1,
+        activeName: 'first'
       }
     },
     methods: {
@@ -80,10 +117,19 @@
       },
       changeIndex(index) {
         this.selectIndex = index
+      },
+      closeAction() {
+        this.showFooter = !this.showFooter
+      },
+      chooseAction(index) {
+        this.i = index
+      },
+      handleClick(tab, event) {
+        console.log(tab, event);
       }
     },
     created() {
-      copyDetail().then( res => {
+      copyDetail().then(res => {
         this.copyDetailList = res.Resp
         console.log(this.copyDetailList)
       })
@@ -388,7 +434,7 @@
     display: block;
     width: 100%;
     height: 0.88rem;
-    border-bottom: 1px solid #ccc;
+    /* border-bottom: 1px solid #ccc; */
 
     ul {
       display: flex;
@@ -408,19 +454,22 @@
     border-bottom: 3px solid #d81d36;
   }
 
-  .buy {
+  .footer-wrap {
     position: fixed;
     bottom: 0;
     width: 100%;
     background: #f7f7f7;
-    ul {
-      display: flex;
+
+    .num {
+      display: block;
       width: 100%;
       padding: 0.2rem 0.32rem;
       background: #f7f7f7;
       box-sizing: border-box;
+
       li {
-        flex: 1;
+        display: list-item;
+        float: left;
         font-size: 0.32rem;
         box-sizing: border-box;
         border: 1px solid #eee;
@@ -431,8 +480,120 @@
         background: #fff;
         margin-right: 0.16rem;
         color: #333;
+        position: relative;
+
+        .choose {
+          display: block;
+          position: absolute;
+          top: .04rem;
+          left: .84rem;
+
+          img {
+            width: .7rem;
+          }
+        }
+      }
+
+
+
+    }
+
+    .down {
+      display: block;
+      position: relative;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 100;
+      left: 0;
+      bottom: 0;
+      height: 55px;
+      box-sizing: border-box;
+      /* padding: 10px 0; */
+      padding-left: 60px;
+
+      .close {
+        position: absolute;
+        top: 2px;
+        right: 6px;
+        width: 20px;
+        height: 20px;
+        color: #fff;
+        text-align: center;
+        font-size: 16px;
+      }
+
+      img {
+        position: absolute;
+        height: 35px;
+        top: 10px;
+        left: 15px;
+      }
+
+      h4 {
+        display: block;
+        /* padding-top: 5px; */
+        font-size: 18px;
+        color: #FFFFFF;
+        font-weight: 300;
+      }
+
+      p {
+        display: block;
+        font-size: 16px;
+        color: #FFFFFF;
+        /* padding-top: 5px; */
+      }
+
+      .dl-btn {
+        position: absolute;
+        display: block;
+        background-color: #E13E3F;
+        height: 22px;
+        line-height: 22px;
+        top: 17px;
+        right: 45px;
+        text-align: center;
+        text-decoration: none;
+        width: 70px;
+        border: none;
+        color: #FFFFFF;
+        font-size: 15px;
+        border-radius: 5px;
       }
     }
+  }
+
+  .clearfix {
+    zoom: 1;
+  }
+
+</style>
+<style>
+  .el-tabs__nav-scroll {
+    overflow: hidden;
+  }
+
+  .el-tabs__active-bar {
+    background-color: #d81d36;
+    /* margin: 0 .5rem; */
+  }
+
+  .el-tabs__nav {
+    width: 100%;
+    height: .88rem;
+    border: none;
+    display: flex;
+  }
+
+  .el-tabs__item {
+    flex: 1;
+    text-align: center;
+    line-height: .88rem;
+    font-size: 0.28rem;
+  }
+
+  .el-tabs__item.is-active {
+    color: #000;
   }
 
 </style>

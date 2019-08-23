@@ -50,6 +50,7 @@
   }
   
   .el-tabs__nav{
+    width: 100%;
     margin: 0 .3rem;
   }
   .el-tabs__item.is-active{

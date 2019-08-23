@@ -71,7 +71,7 @@
     },
     methods: {
       backAction() {
-        this.$router.push('gd');
+        this.$router.push('/gd');
       },
       changeIndex(index) {
         this.selectIndex = index;
@@ -104,6 +104,7 @@
       height: 0.36rem;
       background: url('../../assets/img/gd/back.png');
       background-size: contain;
+      z-index: 99;
     }
 
     .title {

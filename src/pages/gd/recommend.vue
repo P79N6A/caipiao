@@ -44,8 +44,7 @@
     },
     methods: {
       backAction() {
-        this.$router.go(-1);
-        s
+        this.$router.push('/gd');
       },
       handleChange(val) {
         console.log(val);

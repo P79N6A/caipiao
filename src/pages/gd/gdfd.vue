@@ -73,7 +73,7 @@
     <!-- <gdFollowList/> -->
 
     <!-- 返回顶部按钮 -->
-    <img class="back" src="../../assets/img/gd/huojian.png" v-show="!showBack" @click="backTopAction" />
+    <img class="back" src="../../assets/img/gd/huojian.png" v-show="showBack" @click="backTopAction" />
 
     <!-- 到达底部 -->
     <div class="loading" v-show="showLoading">
@@ -116,14 +116,26 @@
       //底部显示无数据
       loadingAction() {
         window.addEventListener('scroll', function () {
+          //console.log(this.scroll.y)
           const scrollHeight = document.body.scrollHeight || document.documentElement.scrollHeight;
           const clientHeight = document.body.clientHeight || document.documentElement.scrollHeight;
           const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-          if (scrollTop >= scrollHeight - clientHeight) {
-            console.log('页面滑动到底部')
+          if (scrollTop > scrollHeight - clientHeight) {
+            //console.log('页面滑动到底部')
+            console.log('scrollTop', scrollTop)
+            console.log('clientHeight', clientHeight)
+            console.log('scrollHeight', scrollHeight)
             this.showLoading = !this.showLoading;
+            this.showBack = !this.showBack;
           }
         })
+      },
+        handleScroll() {
+        console.log(document.documentElement.scrollTop);
+        if (document.documentElement.scrollTop > 100) {
+          this.showBack = !this.showBack;
+
+        }
       }
     },
     created() {
@@ -146,14 +158,21 @@
       //登录
       checklogin().then(res => {
             const code = res.Resp.code;
-            console.log(code)
+            //console.log(code)
             if (code === 0 ) {
                 this.loginState = true
             }else{
                 this.loginState = false
             }
         })
-    }
+    },
+	
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
   }
 
 </script>

@@ -71,7 +71,7 @@
     },
     methods: {
         backAction() {
-            this.$router.go(-1);
+            this.$router.push('/gd');
         }
     },
     created() {

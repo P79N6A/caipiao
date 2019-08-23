@@ -35,11 +35,6 @@
         profitList: []
       }
     },
-    methods: {
-      backAction() {
-        this.$router.go(-1);
-      }
-    },
     created() {
       hotprofitList().then(res => {
         this.profitList = res;

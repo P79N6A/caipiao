@@ -234,7 +234,7 @@ export default {
                   tagClass = 'zqmj'
                 }
             return tagClass
-		},
+        }
 	},
 	created() {
 		let t = this
@@ -288,12 +288,7 @@ export default {
             }
         })
 		
-	},
-	mounted () {
-		// var axiosa = new axiosa();
-		// console.log(axiosa)
-	},
-};
+	}}
 </script>
 <style lang="less" scoped>
 	.header{

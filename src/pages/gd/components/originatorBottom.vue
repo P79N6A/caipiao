@@ -35,11 +35,6 @@
               userList: []
           }
       },
-      methods: {
-        backAction() {
-          this.$router.go(-1);
-        }
-      },
       created() {
         followUserDetail({
           'ps': 10
