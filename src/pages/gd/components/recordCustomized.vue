@@ -24,7 +24,7 @@
         width: 3.36rem;
         height: 0.52rem;
         position: absolute;
-        top: 50%;
+        top: 35%;
         left: 50%;
         transform: translate(-50%, -50%);
         box-sizing: border-box;

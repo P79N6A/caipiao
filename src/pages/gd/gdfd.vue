@@ -69,8 +69,15 @@
     </div>
 
     <!-- 热门跟单 -->
-    <gdProfitList/>
+    <gdProfitList />
     <!-- <gdFollowList/> -->
+
+    <!--预约发单结构-->
+    <div class="yuyue" v-show="showFd">
+      <a  id="a1"></a>
+      <a  id="a2"></a>
+    </div>
+
 
     <!-- 返回顶部按钮 -->
     <img class="back" src="../../assets/img/gd/huojian.png" v-show="showBack" @click="backTopAction" />
@@ -105,7 +112,8 @@
         showBack: false,
         redList: [],
         hotList: [],
-        loginState:false
+        loginState: false,
+        showFd: false
       }
     },
     methods: {
@@ -130,13 +138,14 @@
           }
         })
       },
-        handleScroll() {
+      handleScroll() {
         console.log(document.documentElement.scrollTop);
         if (document.documentElement.scrollTop > 100) {
           this.showBack = !this.showBack;
 
         }
       }
+      
     },
     created() {
       //触发底部显示无数据
@@ -157,22 +166,22 @@
       })
       //登录
       checklogin().then(res => {
-            const code = res.Resp.code;
-            //console.log(code)
-            if (code === 0 ) {
-                this.loginState = true
-            }else{
-                this.loginState = false
-            }
-        })
+        const code = res.Resp.code;
+        //console.log(code)
+        if (code === 0) {
+          this.loginState = true
+        } else {
+          this.loginState = false
+        }
+      })
     },
-	
-  mounted() {
-    window.addEventListener('scroll', this.handleScroll);
-  },
-  destroyed() {
-    window.removeEventListener('scroll', this.handleScroll);
-  }
+
+    mounted() {
+      window.addEventListener('scroll', this.handleScroll);
+    },
+    destroyed() {
+      window.removeEventListener('scroll', this.handleScroll);
+    }
   }
 
 </script>
@@ -555,29 +564,71 @@
     }
   }
 
-  .back {
-    display: inline;
-    width: 0.7rem;
-    height: 0.7rem;
+  .yuyue {
+    display: block;
     position: fixed;
-    bottom: 2rem;
-    right: .5rem;
-    z-index: 9999;
+    bottom: 1.05rem;
+    background-color: #FFFFFF;
+    width: 100%;
+    height: 2.2rem;
+    z-index: 99;
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+    /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+    /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+    /* Firefox 3.6 - 15 */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+    /* 标准的语法（必须放在最后） */
+    #a1,#a2{
+      width: 1.51rem;
+      height: 1.5rem;
+      background: url('../../assets/img/gd/yyfd.png') no-repeat;
+      background-size: cover;
+      display: block;
+      position: absolute;
+      -webkit-box-shadow:0 0 12px 2px #999999;  
+        -moz-box-shadow:0 0 12px 2px #999999;  
+        box-shadow:0 0 12px 2px #999999;  
+        border-radius: 50%;
+    }
+    #a1{
+	left: 1.82rem;
+	bottom: 0.5rem;
+}
+#a2{
+	right: 1.82rem;
+	bottom: 0.5rem;
+	background: url('../../assets/img/gd/wyfd.png') no-repeat;
+	background-size: cover;
+}
+
+
   }
 
-  .loading {
-    /* display: none; */
-    overflow: hidden;
-    height: 1.3em;
-    margin-top: -0.3em;
-    line-height: 1.5em;
-    vertical-align: text-bottom;
-    position: fixed;
-    bottom: 1rem;
-    font-size: 0.32rem;
-    text-align: center;
-    width: 100%;
-    background: #EEE;
-  }
+    .back {
+      display: inline;
+      width: 0.7rem;
+      height: 0.7rem;
+      position: fixed;
+      bottom: 2rem;
+      right: .5rem;
+      z-index: 9999;
+    }
+
+    .loading {
+      /* display: none; */
+      overflow: hidden;
+      height: 1.3em;
+      margin-top: -0.3em;
+      line-height: 1.5em;
+      vertical-align: text-bottom;
+      position: fixed;
+      bottom: 1rem;
+      font-size: 0.32rem;
+      text-align: center;
+      width: 100%;
+      background: #EEE;
+    }
 
 </style>

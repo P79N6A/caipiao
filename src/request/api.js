@@ -154,7 +154,11 @@ export const followDetail = p => post('/api/phpu/webfollowDetail.phpx', p);
 //发单人详情关注列表
 export const followUserDetail = p => post('/api/phpu/webfollowUserLists.phpx', p);
 //跟单详情
-export const copyDetail = p => post('/api/phpt/copyDetail.phpx', p);
-
-
-
+export const copyDetail = p => post('/api/phpu/copyDetail.phpx', p);
+//我的关注
+export const copyFollowList = p => get('/api/phpu/copyMyfollow.phpx', p);
+//我定制的人
+export const copyAuto = p => get('/api/phpu/webcopyAutoLists.phpx', p);
+//定制我的人
+export const copyUser = p => get('/api/phpu/webcopyUserAutos.phpx', p);
+//我的跟单

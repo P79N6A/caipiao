@@ -5,11 +5,11 @@
                 <div class="home_bg"></div>
                 <div class="home_wz">购彩</div>
             </router-link>
-            <router-link to='/gd/sensation' tag='div' :class="current==1?'gdy hover':'gdy'">
-                <div class="gd_bg" >
+            <!-- <router-link to='/gd/sensation' tag='div' :class="current==1?'gdy hover':'gdy'"> -->
+                <div tag='div' :class="current==1?'gdy hover':'gdy'" class="gd_bg" @click="fdAction(showFd)">
                     <img src="../assets/img/gd/anniu.png" style="width: 0.8rem; height: 0.8rem;margin-top: 0.1rem;" alt="">
                 </div>
-            </router-link>
+            <!-- </router-link> -->
             <div class="gd-btn"></div>
              <template v-if='loginState'>
                 <router-link tag='div' to='/account' :class="current==2?'My hover':'My'">
@@ -29,7 +29,18 @@
 </template>
 <script>
   export default {
-    props:['loginState','current'],
+    data () {
+        return {
+            showFd: false
+        }
+    },
+    props:['loginState','current', 'showFd'],
+    methods: {
+        fdAction() {
+            this.showFd = !this.showFd
+        }
+        
+    }
   };
 </script>
 <style lang="less" scoped>
