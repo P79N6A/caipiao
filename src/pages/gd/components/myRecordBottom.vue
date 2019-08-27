@@ -5,7 +5,7 @@
         <!-- <p>暂无关注用户</p> -->
         <ul class='my-watch'>
           <router-link to="/gd/originator">
-            <li class='clearfix wdgz' v-for="item in copyList" :key="item.uid">
+            <li class='clearfix wdgz' v-for="(item,index) in copyList" :key="item.uid" v-show="showList">
               <div class='touxiang'>
                 <img :src="'/api' + item.imageUrl" alt="" class='tx'>
                 <img src="../../../assets/img/hg.png" class='hg' alt="">
@@ -15,7 +15,7 @@
                     class='hit'>{{item.allnum}}中{{item.hitnum}}</span></div>
                 <div><span>7日盈利率：<s>{{item.profit}}%</s></span><span>粉丝：<s>{{item.ifoucsnum}}</s></span></div>
               </div>
-              <div class='delete'>
+              <div class='delete' @click="clearAction(index)">
               </div>
             </li>
           </router-link>
@@ -41,7 +41,9 @@
         </router-link>
         </ul>
       </el-tab-pane>
-      <el-tab-pane class="programme" label="我的方案" name="fourth"></el-tab-pane>
+      <el-tab-pane class="programme" label="我的方案" name="fourth">
+        <p>暂无数据</p>
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -58,14 +60,19 @@
     },
     data() {
       return {
-        activeName: 'third',
+        activeName: 'first',
         copyList: [],
-        followList: []
+        followList: [],
+        showList: true
       };
     },
     methods: {
       handleClick(tab, event) {
         //console.log(tab, event);
+      },
+      clearAction(index) {
+        let li_list = document.getElementsByClassName('my-watch').querySelectorAll('li');
+        li_list(index).remove();
       }
     },
     created() {
@@ -223,7 +230,7 @@
           width: 1.5rem;
           background: url('../../../assets/img/gd/icon-clear.png') no-repeat center;
           background-size: 0.4rem 0.4rem;
-          z-index: 99;
+          z-index: 999999;
         }
       }
     }
@@ -328,6 +335,14 @@
 
     }
 
+  }
+
+  .programme {
+    p {
+      display: block;
+      text-align: center;
+      font-size: .3rem;
+    }
   }
 
 </style>

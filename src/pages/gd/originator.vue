@@ -43,12 +43,13 @@
       </div>
       <div class='near-box'>
         <span>近5期</span>
-        <ul class='fnow'>
-          <li class="white">中</li>
-          <li class="white">中</li>
-          <li class="white">中</li>
-          <li class="white">中</li>
-          <li class="white">中</li>
+        <ul class="fnow" v-for="(value, index) in ismoneyList.slice(0,1)">
+          <!-- <li class="nohit" v-if="value.ismoney = 0">未</li> -->
+          <li :class="value.ismoney=1 ? 'nohit' : ''">红</li>
+          <li :class="value.ismoney=1 ? 'nohit' : ''">红</li>
+          <li :class="value.ismoney=1 ? 'nohit' : ''">红</li>
+          <li :class="value.ismoney=1 ? 'nohit' : ''">红</li>
+          <li :class="value.ismoney=1 ? 'nohit' : ''">红</li>
         </ul>
       </div>
     </div>
@@ -93,26 +94,35 @@
       <div class="foot_left">
         <img src="../../assets/img/gd/fot3.png" />
         <span class="guanzhu red">关注</span>
-      </div>
+      </div>      
+      <!-- <div class="foot_left" v-else="showWgz">
+          <img src="../../assets/img/gd/fot1.png" />
+          <span class="guanzhu red">已关注</span>
+        </div> -->
+      <router-link to="/gd/dzgd">
       <div class="foot_right">
         <img src="../../assets/img/gd/fot4.png" />
         <span class="dzgd">定制跟单</span>
       </div>
+    </router-link>
     </div>
   </div>
 </template>
 
 <script>
   import {
-    followDetail,
     followUserDetail,
-    userInfo
+    userInfo,
+    myrecord
   } from '@/request/api';
   export default {
     data() {
       return {
         deailList: [],
         userList: [],
+        ismoneyList: [],
+        showWgz: true,
+
         userUid: '',
         userInfo: new Object()
       }
@@ -130,11 +140,12 @@
         //console.log(res)
         this.userUid = res.Resp.row.userid
       })
-      followDetail({
+      myrecord({
           'owner': 12501549
         }).then(res => {
           console.log(res)
-          this.deailList = res.Resp.row
+          this.deailList = res.Resp.row;
+          this.ismoneyList = res.Resp.row.result;
         }),
         //跟单详情
         followUserDetail({
@@ -304,6 +315,20 @@
       zoom: 1;
       height: 1.18rem;
       border-bottom: 0.2rem solid rgb(238, 238, 238);
+
+      .nohit {
+        float: left;
+    font-size: 0.26rem;
+    color: #fff;
+    width: 0.52rem;
+    height: 0.52rem;
+    text-align: center;
+    line-height: 0.45rem;
+    border: 3px solid #999;
+    border-radius: 50%;
+    box-sizing: border-box;
+    background: #999;
+      }
 
       span {
         font-size: 0.28rem;

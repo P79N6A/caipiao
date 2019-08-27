@@ -19,7 +19,7 @@
           </div>
           <div v-if="item.canCopyNum > 0">
           <input type="button" id="btn1" value="跟单" />
-          <span class="cirl">1</span></div>
+          <span class="cirl">{{item.canCopyNum}}</span></div>
         </div>
       </li>
     </ul>

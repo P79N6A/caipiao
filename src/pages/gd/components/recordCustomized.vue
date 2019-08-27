@@ -9,6 +9,15 @@
     <div class="show-box">
       <p>没有定制用户</p>
     </div>
+    <!-- <el-tabs class="box" v-model="activeName">
+        <el-tab-pane class="my" label="我定制的人" name="first">
+          <p>暂无数据</p>
+        </el-tab-pane>
+        <el-tab-pane class="follow-me" label="定制我的人" name="second">
+          <p>暂无数据</p>
+        </el-tab-pane>
+      </el-tabs> -->
+  
   </div>
 </template>
 

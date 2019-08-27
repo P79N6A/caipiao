@@ -20,36 +20,247 @@
     <div class="hot-bottom">
       <ul>
         <router-link to='/gd/gdxq'>
-        <li class="gditem">
-          <div class="introduce">
-            <div class="int-l">
-              <img :src="'/api'+hotList.imageUrl" alt="">
+          <li class="gditem">
+            <div class="introduce">
+              <div class="int-l">
+                <img :src="'/api'+hotList.imageUrl" alt="">
+              </div>
+              <div class="int-m">
+                <p>{{hotList.nickname}}</p>
+                <span>{{hotList.hit_week}}连红</span>
+              </div>
+              <div class="int-r">
+                <p>{{hotList.allnum}}中{{hotList.hitnum}}</p>
+              </div>
             </div>
-            <div class="int-m">
-              <p>{{hotList.nickname}}</p>
-              <span>{{hotList.hit_week}}连红</span>
+            <div class="content">
+              <div class="con-top">
+                <img src="../../../assets/img/foot.png" alt="">
+                <span>预计回报:</span>
+                <span>{{hotList.ireturnrate}}倍</span>
+                <span class="leagues">精选赛事</span>
+                <span>截止</span>
+                <span>{{hotList.cendtime}}</span>
+              </div>
+              <p>{{hotList.note}}</p>
+              <div class="con-bottom">
+                <span>自购<span class="buy">{{hotList.itmoney}}</span>元</span>
+                <span class="con-bottom-follow">跟单<span class="buy">{{hotList.copycount}}</span>人</span>
+                <input class="btn1" type="button" value="立即跟单">
+              </div>
             </div>
-            <div class="int-r">
-              <p>{{hotList.allnum}}中{{hotList.hitnum}}</p>
+          </li>
+          <li class="gditem">
+            <div class="introduce">
+              <div class="int-l">
+                <img :src="'/api'+hotList.imageUrl" alt="">
+              </div>
+              <div class="int-m">
+                <p>{{hotList.nickname}}</p>
+                <span>{{hotList.hit_week}}连红</span>
+              </div>
+              <div class="int-r">
+                <p>{{hotList.allnum}}中{{hotList.hitnum}}</p>
+              </div>
             </div>
-          </div>
-          <div class="content">
-            <div class="con-top">
-              <img src="../../../assets/img/foot.png" alt="">
-              <span>预计回报:</span>
-              <span>{{hotList.ireturnrate}}倍</span>
-              <span class="leagues">精选赛事</span>
-              <span>截止</span>
-              <span>{{hotList.cendtime}}</span>
+            <div class="content">
+              <div class="con-top">
+                <img src="../../../assets/img/foot.png" alt="">
+                <span>预计回报:</span>
+                <span>{{hotList.ireturnrate}}倍</span>
+                <span class="leagues">精选赛事</span>
+                <span>截止</span>
+                <span>{{hotList.cendtime}}</span>
+              </div>
+              <p>{{hotList.note}}</p>
+              <div class="con-bottom">
+                <span>自购<span class="buy">{{hotList.itmoney}}</span>元</span>
+                <span class="con-bottom-follow">跟单<span class="buy">{{hotList.copycount}}</span>人</span>
+                <input class="btn1" type="button" value="立即跟单">
+              </div>
             </div>
-            <p>{{hotList.note}}</p>
-            <div class="con-bottom">
-              <span>自购<span class="buy">{{hotList.itmoney}}</span>元</span>
-              <span class="con-bottom-follow">跟单<span class="buy">{{hotList.copycount}}</span>人</span>
-              <input class="btn1" type="button" value="立即跟单">
+          </li>
+          <li class="gditem">
+            <div class="introduce">
+              <div class="int-l">
+                <img :src="'/api'+hotList.imageUrl" alt="">
+              </div>
+              <div class="int-m">
+                <p>{{hotList.nickname}}</p>
+                <span>{{hotList.hit_week}}连红</span>
+              </div>
+              <div class="int-r">
+                <p>{{hotList.allnum}}中{{hotList.hitnum}}</p>
+              </div>
             </div>
-          </div>
-        </li></router-link>
+            <div class="content">
+              <div class="con-top">
+                <img src="../../../assets/img/foot.png" alt="">
+                <span>预计回报:</span>
+                <span>{{hotList.ireturnrate}}倍</span>
+                <span class="leagues">精选赛事</span>
+                <span>截止</span>
+                <span>{{hotList.cendtime}}</span>
+              </div>
+              <p>{{hotList.note}}</p>
+              <div class="con-bottom">
+                <span>自购<span class="buy">{{hotList.itmoney}}</span>元</span>
+                <span class="con-bottom-follow">跟单<span class="buy">{{hotList.copycount}}</span>人</span>
+                <input class="btn1" type="button" value="立即跟单">
+              </div>
+            </div>
+          </li>
+          <li class="gditem">
+            <div class="introduce">
+              <div class="int-l">
+                <img :src="'/api'+hotList.imageUrl" alt="">
+              </div>
+              <div class="int-m">
+                <p>{{hotList.nickname}}</p>
+                <span>{{hotList.hit_week}}连红</span>
+              </div>
+              <div class="int-r">
+                <p>{{hotList.allnum}}中{{hotList.hitnum}}</p>
+              </div>
+            </div>
+            <div class="content">
+              <div class="con-top">
+                <img src="../../../assets/img/foot.png" alt="">
+                <span>预计回报:</span>
+                <span>{{hotList.ireturnrate}}倍</span>
+                <span class="leagues">精选赛事</span>
+                <span>截止</span>
+                <span>{{hotList.cendtime}}</span>
+              </div>
+              <p>{{hotList.note}}</p>
+              <div class="con-bottom">
+                <span>自购<span class="buy">{{hotList.itmoney}}</span>元</span>
+                <span class="con-bottom-follow">跟单<span class="buy">{{hotList.copycount}}</span>人</span>
+                <input class="btn1" type="button" value="立即跟单">
+              </div>
+            </div>
+          </li>
+          <li class="gditem">
+            <div class="introduce">
+              <div class="int-l">
+                <img :src="'/api'+hotList.imageUrl" alt="">
+              </div>
+              <div class="int-m">
+                <p>{{hotList.nickname}}</p>
+                <span>{{hotList.hit_week}}连红</span>
+              </div>
+              <div class="int-r">
+                <p>{{hotList.allnum}}中{{hotList.hitnum}}</p>
+              </div>
+            </div>
+            <div class="content">
+              <div class="con-top">
+                <img src="../../../assets/img/foot.png" alt="">
+                <span>预计回报:</span>
+                <span>{{hotList.ireturnrate}}倍</span>
+                <span class="leagues">精选赛事</span>
+                <span>截止</span>
+                <span>{{hotList.cendtime}}</span>
+              </div>
+              <p>{{hotList.note}}</p>
+              <div class="con-bottom">
+                <span>自购<span class="buy">{{hotList.itmoney}}</span>元</span>
+                <span class="con-bottom-follow">跟单<span class="buy">{{hotList.copycount}}</span>人</span>
+                <input class="btn1" type="button" value="立即跟单">
+              </div>
+            </div>
+          </li>
+          <li class="gditem">
+            <div class="introduce">
+              <div class="int-l">
+                <img :src="'/api'+hotList.imageUrl" alt="">
+              </div>
+              <div class="int-m">
+                <p>{{hotList.nickname}}</p>
+                <span>{{hotList.hit_week}}连红</span>
+              </div>
+              <div class="int-r">
+                <p>{{hotList.allnum}}中{{hotList.hitnum}}</p>
+              </div>
+            </div>
+            <div class="content">
+              <div class="con-top">
+                <img src="../../../assets/img/foot.png" alt="">
+                <span>预计回报:</span>
+                <span>{{hotList.ireturnrate}}倍</span>
+                <span class="leagues">精选赛事</span>
+                <span>截止</span>
+                <span>{{hotList.cendtime}}</span>
+              </div>
+              <p>{{hotList.note}}</p>
+              <div class="con-bottom">
+                <span>自购<span class="buy">{{hotList.itmoney}}</span>元</span>
+                <span class="con-bottom-follow">跟单<span class="buy">{{hotList.copycount}}</span>人</span>
+                <input class="btn1" type="button" value="立即跟单">
+              </div>
+            </div>
+          </li>
+          <li class="gditem">
+            <div class="introduce">
+              <div class="int-l">
+                <img :src="'/api'+hotList.imageUrl" alt="">
+              </div>
+              <div class="int-m">
+                <p>{{hotList.nickname}}</p>
+                <span>{{hotList.hit_week}}连红</span>
+              </div>
+              <div class="int-r">
+                <p>{{hotList.allnum}}中{{hotList.hitnum}}</p>
+              </div>
+            </div>
+            <div class="content">
+              <div class="con-top">
+                <img src="../../../assets/img/foot.png" alt="">
+                <span>预计回报:</span>
+                <span>{{hotList.ireturnrate}}倍</span>
+                <span class="leagues">精选赛事</span>
+                <span>截止</span>
+                <span>{{hotList.cendtime}}</span>
+              </div>
+              <p>{{hotList.note}}</p>
+              <div class="con-bottom">
+                <span>自购<span class="buy">{{hotList.itmoney}}</span>元</span>
+                <span class="con-bottom-follow">跟单<span class="buy">{{hotList.copycount}}</span>人</span>
+                <input class="btn1" type="button" value="立即跟单">
+              </div>
+            </div>
+          </li>
+          <li class="gditem">
+            <div class="introduce">
+              <div class="int-l">
+                <img :src="'/api'+hotList.imageUrl" alt="">
+              </div>
+              <div class="int-m">
+                <p>{{hotList.nickname}}</p>
+                <span>{{hotList.hit_week}}连红</span>
+              </div>
+              <div class="int-r">
+                <p>{{hotList.allnum}}中{{hotList.hitnum}}</p>
+              </div>
+            </div>
+            <div class="content">
+              <div class="con-top">
+                <img src="../../../assets/img/foot.png" alt="">
+                <span>预计回报:</span>
+                <span>{{hotList.ireturnrate}}倍</span>
+                <span class="leagues">精选赛事</span>
+                <span>截止</span>
+                <span>{{hotList.cendtime}}</span>
+              </div>
+              <p>{{hotList.note}}</p>
+              <div class="con-bottom">
+                <span>自购<span class="buy">{{hotList.itmoney}}</span>元</span>
+                <span class="con-bottom-follow">跟单<span class="buy">{{hotList.copycount}}</span>人</span>
+                <input class="btn1" type="button" value="立即跟单">
+              </div>
+            </div>
+          </li>
+        </router-link>
       </ul>
     </div>
   </div>
@@ -62,12 +273,12 @@
   } from '@/request/api';
   export default {
     data() {
-        return {
-      hotList: []
-    }
+      return {
+        hotList: []
+      }
     },
     created() {
-        hotDocmentsList({
+      hotDocmentsList({
         'fid': 'web_jczq_hot_List',
         'ps': 1,
         'pn': 1
@@ -84,6 +295,7 @@
 <style lang="scss" scoped>
   .hot {
     margin-bottom: 1rem;
+
     .hot-top {
       width: 100%;
       height: 0.92rem;

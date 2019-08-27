@@ -11,12 +11,13 @@
     <!-- 用户 -->
     <div class='clearfix user'>
       <div class='touxiang'>
-        <img src="../../assets/img/gd/hongren.png" alt="" class='tx'>
+        <img :src="'/api' + copyDetailList.imageUrl" alt="" class='tx'>
         <img class='hg' src="../../assets/img/hg.png" alt="">
       </div>
       <div class='userInfo'>
-        <div class='clearfix'><span class='username'>召唤师峡谷</span> <span
-            class='pi'>5中4</span><span>7日盈利率:<s>100%</s></span></div>
+        <div class='clearfix'><span class='username'>{{copyDetailList.nickname}}</span> <span
+            class='pi'>{{copyDetailList.allnum}}中{{copyDetailList.hitnum}}</span><span>7日盈利率:<s>{{copyDetailList.ravgreturn}}%</s></span>
+        </div>
         <div class='clearfix usertitle'>
           <span class="lh_7">7连红</span>
         </div>
@@ -28,28 +29,62 @@
       <p class='clearfix'>
         <span class='type'>竞彩足球</span>
         <span class='chuan'></span>
-        <span class='beishu'><s>--</s>倍</span>
+        <span class='beishu'><s>{{copyDetailList.returnrate}}</s>倍</span>
         <span>预计回报</span>
       </p>
       <div class='clearfix match'>
-        <span class='purple'>亚冠</span>
+        <span class='purple'>{{copyDetailList.league}}</span>
       </div>
-      <span class='judgment'>从不马后炮，多说无益，用稳定的命中率良心推单</span>
+      <span class='judgment'>{{copyDetailList.note}}</span>
       <div class='gdinfo'>
-        <p><span>自购<i class='buy'>2000</i>元</span> <span>跟单<i class='follow'>156,142</i>元</span><span
-            class='permoney'>2元起投</span></p>
-        <p><span class='gid'>cp7011287920</span> <span class='openTime'>发单时间：2016-12-15 15:36</span></p>
+        <p><span>自购<i class='buy'>{{copyDetailList.money}}</i>元</span> <span>跟单<i
+              class='follow'>{{copyDetailList.copysum}}</i>元</span><span class='permoney'>2元起投</span></p>
+        <p><span class='gid'>{{copyDetailList.projid}}</span> <span
+            class='openTime'>发单时间：{{copyDetailList.adddate}}</span></p>
       </div>
-      <div class='status'>
-        <span></span>
+      <div class='status' v-if="copyDetailList.result === '已中奖'">
+        <span>{{copyDetailList.winMoney}}</span>
       </div>
     </section>
 
     <nav class="title">
       <el-tabs class="box" v-model="activeName" @tab-click="handleClick">
         <el-tab-pane class="follow" label="方案详情" name="first">
+          <table class="project" border="0" cellpadding="0" cellspacing="0" >
+            <caption class="t-title">过关方式：单关 </caption>
+            <thead class="t-top">
+              <tr>
+                <td>场次</td>
+                <td>主队</td>
+                <td>比分</td>
+                <td>客队</td>
+                <td>投注内容</td>
+              </tr>
+            </thead>
+            <tbody v-for="value in guoguanList" :key="value.id">
+              <tr>
+                <td>
+                  <div>{{value.name}}</div>
+                </td>
+                <td>{{value.hn}}</td>
+                <td>
+                  <div class="ban">半 {{value.hvs}}:{{value.hhs}}</div>
+                  <div class="quan">全 {{value.hs}}:{{value.vs}}</div>
+                </td>
+                <td>{{value.vn}}</td>
+                <td>
+                  <div style="color: #d81d36;">负-负(2.12)</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </el-tab-pane>
         <el-tab-pane class="customized" label="跟单用户" name="second">
+          <ul class="gd-list">
+            <li v-for="(item, index) in copyUserList"><span class="name">{{item.nickname}}</span><span class="mount"><s>{{item.imoney}}</s>元</span> <span class="time">{{item.cadddate.slice(5,16)}}</span></li>
+            <li><span class="name">一笑******</span><span class="mount"><s>10</s>元</span> <span class="time">08-26
+                21:11</span></li>
+          </ul>
         </el-tab-pane>
       </el-tabs>
 
@@ -63,9 +98,9 @@
 
     <footer class="footer-wrap">
       <ul class='clearfix num'>
-        <li v-for="(value, index) in numList" @click="chooseAction(index)">{{value}}
+        <li v-for="(value, index) in numList" @click="chooseAction(index)" >{{value}}
           <span class="choose" v-show="index !== i">
-            <img src="../../assets/img/gd/chechicon.png" alt="">
+            <!-- <img src="../../assets/img/gd/chechicon.png" alt=""> -->
           </span>
         </li>
 
@@ -96,7 +131,9 @@
 
 <script>
   import {
-    copyDetail
+    copyDetail,
+    copyUsers,
+    guoguan
   } from '@/request/api'
   export default {
     data() {
@@ -104,6 +141,8 @@
         numList: ['10倍', '20倍', '50倍', '100倍'],
         selectIndex: 0,
         copyDetailList: [],
+        copyUserList: [],
+        guoguanList: [],
         showFooter: true,
         showChoose: false,
         num: 5,
@@ -129,9 +168,23 @@
       }
     },
     created() {
-      copyDetail().then(res => {
+      copyDetail({
+        'gid': 70,
+        'hid': 'CP70150795445'
+      }).then(res => {
         this.copyDetailList = res.Resp
-        console.log(this.copyDetailList)
+      }),
+      copyUsers({
+        'gid': 70,
+        'hid': 'CP70150795445',
+        'pn': 1
+      }).then( res => {
+        this.copyUserList = res.Resp.userlist.userinfo
+      }),
+      guoguan({
+        'r': '0.5496727684465395'
+      }).then( res => {
+        this.guoguanList = res.items.item
       })
     }
 
@@ -428,6 +481,27 @@
         }
       }
     }
+
+    .status {
+      position: absolute;
+      width: 1.35rem;
+      height: 1.08rem;
+      top: 0.5rem;
+      right: 2.1rem;
+      background: url('../../assets/img/gd/prize.png') no-repeat;
+      background-size: cover;
+
+      span {
+        font-size: 0.3rem !important;
+        transform: rotate(14deg);
+        margin-top: 0.3rem;
+        color: #d81d36;
+        width: 1.4rem;
+        text-align: center;
+        float: left;
+        margin-right: 0.2rem;
+      }
+    }
   }
 
   .title {
@@ -435,8 +509,102 @@
     width: 100%;
     height: 0.88rem;
     /* border-bottom: 1px solid #ccc; */
+    
+    .t-box {
+      width: 100%;
+    }
 
-    ul {
+    .project {
+      width: 96%;
+      text-align: center;
+      border-left: 1px solid #cccccc;
+      border-bottom: 1px solid #cccccc;
+      margin-left: 2%;
+      margin-bottom: 1rem;
+      box-sizing: border-box;
+
+      .t-title {
+        font-size: 0.3rem;
+        text-align: left;
+        padding: 0.2rem;
+        box-sizing: border-box;
+        border-left: 1px solid #eee;
+        border-right: 1px solid #eee;
+        border-top: 1px solid #ccc;
+      }
+
+      .t-top,
+      tbody {
+        background-color: #EEEEEE;
+
+        tr {
+          border-bottom: 1px solid #cccccc;
+
+          td {
+            font-size: 0.24rem;
+            border-right: 1px solid #cccccc;
+            border-top: 1px solid #cccccc;
+            vertical-align: middle;
+            color: #000;
+          }
+        }
+
+      }
+
+      tbody {
+        background-color: #fff;
+
+        .ban {
+          color: #c37338;
+        }
+
+        .quan {
+          color: #4d8c95;
+        }
+
+
+      }
+    }
+
+    .gd-list {
+      display: block;
+      box-sizing: border-box;
+      width: 100%;
+      overflow: auto;
+
+      li {
+        width: 100%;
+        height: 0.8rem;
+        box-sizing: border-box;
+        border-bottom: 1px solid #eee;
+        padding: 0 0.32rem;
+
+        span {
+          font-size: 0.3rem;
+          color: #333;
+          display: block;
+          float: left;
+          height: 100%;
+          width: 33.3%;
+          text-align: center;
+          line-height: 0.8rem;
+
+          s {
+            font-style: normal;
+            color: #d81d36;
+            text-decoration: none;
+            font-size: 0.26rem;
+          }
+        }
+
+        .time {
+          float: right;
+        }
+      }
+    }
+
+
+    /* ul {
       display: flex;
 
       li {
@@ -447,7 +615,7 @@
         font-size: 0.28rem;
         box-sizing: border-box;
       }
-    }
+    } */
   }
 
   .active {
@@ -485,12 +653,10 @@
         .choose {
           display: block;
           position: absolute;
+          width: .7rem;
           top: .04rem;
           left: .84rem;
-
-          img {
-            width: .7rem;
-          }
+          background: url('../../assets/img/gd/chechicon.png') cover;
         }
       }
 
@@ -594,6 +760,10 @@
 
   .el-tabs__item.is-active {
     color: #000;
+  }
+
+  .el-tabs__header {
+    margin: 0;
   }
 
 </style>

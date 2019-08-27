@@ -213,6 +213,14 @@ const router = new Router({
         {
           path: 'fzgdNew27',
           component: () => import('@/pages/help/fzgdNew27')
+        },        
+        {
+          path: 'yygd',
+          component: () => import('@/pages/help/yygd')
+        },
+        {
+          path: 'dzgd',
+          component: () => import('@/pages/help/dzgd')
         },
         {
           path: 'gid50',
@@ -314,6 +322,14 @@ const router = new Router({
         {
           path: 'gdxq',
           component: () => import('@/pages/gd/gdxq')
+        },
+        {
+          path: 'billingf',
+          component: () => import('@/pages/gd/billingf')
+        },
+        {
+          path: 'dzgd',
+          component: () => import('@/pages/gd/dzgd')
         }
       ]
     }

@@ -137,7 +137,7 @@ export const checklogin = p =>get('/api/phpu/cl.phpx',p)
 //红人
 export const sensationList = p => get('/api//cpdata/copy/webRedPersons.json', p)
 //热门跟单列表
-export const hotDocmentsList = p => post('/api/phpt/copyJczqs.phpx', p);
+export const hotDocmentsList = p => get('/api/phpt/copyJczqs.phpx', p);
 //全部红人
 export const allSensationList = p => get('/api/cpdata/copy/webRedPersonList.json', p);
 //晒红单
@@ -145,20 +145,23 @@ export const showRedbillList = p => get('/api/cpdata/copy/webHighBonus.json', p)
 //热门榜单
 export const hotprofitList = p => get('/api/cpdata/phot/31/webHitWeekUserList.json', p);
 export const hotprofitReturnList = p => get('/api/cpdata/phot/31/webReturnWeekUserList.json', p);
-//我的战绩
-export const myrecord = p => get('/api/phpu/webfollowDetail.phpx', p);
+//我的战绩, 发单人详情
+export const myrecord = p => post('/api/phpu/webfollowDetail.phpx', p);
 //牛人推荐
 export const recommendList = p => get('/api/cpdata/copy/webNiuRens.json', p);
-//发单人详情
-export const followDetail = p => post('/api/phpu/webfollowDetail.phpx', p);
 //发单人详情关注列表
 export const followUserDetail = p => post('/api/phpu/webfollowUserLists.phpx', p);
 //跟单详情
-export const copyDetail = p => post('/api/phpu/copyDetail.phpx', p);
+export const copyDetail = p => get('/api/phpt/copyDetail.phpx', p);
 //我的关注
 export const copyFollowList = p => get('/api/phpu/copyMyfollow.phpx', p);
 //我定制的人
 export const copyAuto = p => get('/api/phpu/webcopyAutoLists.phpx', p);
 //定制我的人
 export const copyUser = p => get('/api/phpu/webcopyUserAutos.phpx', p);
-//我的跟单
+//跟单用户
+export const copyUsers = p => get('/api/phpt/copyUserLists.phpx', p);
+//方案详情
+export const guoguan = p => get('/api/cpdata/guoguan/70/20190826/proj/cp70150795445.json', p);
+
+

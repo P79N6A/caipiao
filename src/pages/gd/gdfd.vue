@@ -69,13 +69,62 @@
     </div>
 
     <!-- 热门跟单 -->
-    <gdProfitList />
+    <!-- <gdProfitList/> -->
     <!-- <gdFollowList/> -->
+    <div class="hot">
+      <!-- 头部 -->
+      <div class="hot-top">
+        <div class="top-l">
+          <span class="title">热门跟单</span>
 
-    <!--预约发单结构-->
-    <div class="yuyue" v-show="showFd">
-      <a  id="a1"></a>
-      <a  id="a2"></a>
+          <router-link to='/gd/search'>
+            <span class="search"> </span>
+            <!-- <img class="search" src="../../../assets/img/gd/search.png" alt=""/> -->
+          </router-link>
+
+        </div>
+        <div class="top-r">
+          <span class="follow-icon"></span>
+          <span class="follow">关注</span>
+        </div>
+      </div>
+      <!-- 跟单列表 -->
+      <div class="hot-bottom">
+        <ul>
+          <router-link to='/gd/gdxq'>
+            <li class="gditem">
+              <div class="introduce">
+                <div class="int-l">
+                  <img :src="'/api'+hotList.imageUrl" alt="">
+                </div>
+                <div class="int-m">
+                  <p>{{hotList.nickname}}</p>
+                  <span>{{hotList.hit_week}}连红</span>
+                </div>
+                <div class="int-r">
+                  <p>{{hotList.allnum}}中{{hotList.hitnum}}</p>
+                </div>
+              </div>
+              <div class="content">
+                <div class="con-top">
+                  <img src="../../assets/img/foot.png" alt="">
+                  <span>预计回报:</span>
+                  <span>{{hotList.ireturnrate}}倍</span>
+                  <span class="leagues">精选赛事</span>
+                  <span>截止</span>
+                  <span>{{hotList.cendtime}}</span>
+                </div>
+                <p>{{hotList.note}}</p>
+                <div class="con-bottom">
+                  <span>自购<span class="buy">{{hotList.itmoney}}</span>元</span>
+                  <span class="con-bottom-follow">跟单<span class="buy">{{hotList.copycount}}</span>人</span>
+                  <input class="btn1" type="button" value="立即跟单">
+                </div>
+              </div>
+            </li>
+          </router-link>
+        </ul>
+      </div>
     </div>
 
 
@@ -112,8 +161,7 @@
         showBack: false,
         redList: [],
         hotList: [],
-        loginState: false,
-        showFd: false
+        loginState: false
       }
     },
     methods: {
@@ -142,7 +190,6 @@
         console.log(document.documentElement.scrollTop);
         if (document.documentElement.scrollTop > 100) {
           this.showBack = !this.showBack;
-
         }
       }
       
@@ -158,8 +205,8 @@
       })
       //热门跟单数据
       hotDocmentsList({
-        'fid': 'web_jczqList',
-        'ps': 10,
+        'fid': 'web_jczq_hot_List',
+        'ps': 1,
         'pn': 1
       }).then(res => {
         this.hotList = res.Resp.rows.row
@@ -321,6 +368,8 @@
   }
 
   .hot {
+    margin-bottom: 1rem;
+
     .hot-top {
       width: 100%;
       height: 0.92rem;
@@ -562,48 +611,6 @@
       }
 
     }
-  }
-
-  .yuyue {
-    display: block;
-    position: fixed;
-    bottom: 1.05rem;
-    background-color: #FFFFFF;
-    width: 100%;
-    height: 2.2rem;
-    z-index: 99;
-    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
-    /* Safari 5.1 - 6.0 */
-    background: -o-linear-gradient(bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
-    /* Opera 11.1 - 12.0 */
-    background: -moz-linear-gradient(bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
-    /* Firefox 3.6 - 15 */
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
-    /* 标准的语法（必须放在最后） */
-    #a1,#a2{
-      width: 1.51rem;
-      height: 1.5rem;
-      background: url('../../assets/img/gd/yyfd.png') no-repeat;
-      background-size: cover;
-      display: block;
-      position: absolute;
-      -webkit-box-shadow:0 0 12px 2px #999999;  
-        -moz-box-shadow:0 0 12px 2px #999999;  
-        box-shadow:0 0 12px 2px #999999;  
-        border-radius: 50%;
-    }
-    #a1{
-	left: 1.82rem;
-	bottom: 0.5rem;
-}
-#a2{
-	right: 1.82rem;
-	bottom: 0.5rem;
-	background: url('../../assets/img/gd/wyfd.png') no-repeat;
-	background-size: cover;
-}
-
-
   }
 
     .back {

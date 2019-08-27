@@ -16,6 +16,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import Vant from 'vant';
 import 'vant/lib/index.css';
+import animated from 'animate.css'
 //import { Search } from 'mint-ui';
 Vue.config.productionTip = false
 Vue.use(infiniteScroll);
