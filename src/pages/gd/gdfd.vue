@@ -52,7 +52,8 @@
       <!-- 红人导航 -->
       <div class="sensation-bottom">
         <ul>
-          <router-link to="/gd/originator">
+          <!-- <router-link to="{path:'originator', query:{uid: '11716948'}}"> -->
+          <router-link to='/gd/originator'>
             <li v-for="(item, index) in redList.slice(0,7)" :key="item.uid">
               <img :src="'/api'+item.imageUrl" alt="" />
               <p>{{item.nickname}}</p>
@@ -88,41 +89,57 @@
           <span class="follow">关注</span>
         </div>
       </div>
+      <ul class="paixu">
+        <li class="" data-px="qb" v-for="(item3, index) in pxList" @click="pxAciton(index)">
+          <p>{{item3.name}}</p>
+          <span class="jiantou1"></span>
+        </li>
+        <!-- <li data-px="rd" class="">
+          <p>跟单热度</p>
+          <span class="jiantou1"></span>
+        </li>
+        <li data-px="time" class="current">
+          <p>发单时间</p>
+          <span class="jiantou1"></span>
+        </li> -->
+      </ul>
       <!-- 跟单列表 -->
       <div class="hot-bottom">
         <ul>
-          <router-link to='/gd/gdxq'>
-            <li class="gditem">
-              <div class="introduce">
-                <div class="int-l">
-                  <img :src="'/api'+hotList.imageUrl" alt="">
-                </div>
-                <div class="int-m">
-                  <p>{{hotList.nickname}}</p>
-                  <span>{{hotList.hit_week}}连红</span>
-                </div>
-                <div class="int-r">
-                  <p>{{hotList.allnum}}中{{hotList.hitnum}}</p>
-                </div>
+          <!-- <router-link to='/gd/originator'> -->
+          <li class="gditem" v-for="(item2, index) in hotList" :key="item2.projid" @click="toAction">
+            <div class="introduce">
+              <div class="int-l">
+                <img :src="'/api'+item2.imageUrl" alt="">
+                <span class="crow" v-if="item2.ishot != 0"></span>
               </div>
-              <div class="content">
-                <div class="con-top">
-                  <img src="../../assets/img/foot.png" alt="">
-                  <span>预计回报:</span>
-                  <span>{{hotList.ireturnrate}}倍</span>
-                  <span class="leagues">精选赛事</span>
-                  <span>截止</span>
-                  <span>{{hotList.cendtime}}</span>
-                </div>
-                <p>{{hotList.note}}</p>
-                <div class="con-bottom">
-                  <span>自购<span class="buy">{{hotList.itmoney}}</span>元</span>
-                  <span class="con-bottom-follow">跟单<span class="buy">{{hotList.copycount}}</span>人</span>
-                  <input class="btn1" type="button" value="立即跟单">
-                </div>
+              <div class="int-m">
+                <p>{{item2.nickname}}</p>
+                <span>{{item2.hit_week}}连红</span>
               </div>
-            </li>
-          </router-link>
+              <div class="int-r">
+                <p>{{item2.allnum}}中{{item2.hitnum}}</p>
+              </div>
+            </div>
+            <div class="content">
+              <div class="con-top">
+                <img src="../../assets/img/foot.png" alt="">
+                <span>预计回报:</span>
+                <span>{{item2.ireturnrate}}倍</span>
+                <span class="leagues">精选赛事</span>
+                <span>截止</span>
+                <span>{{item2.cendtime}}</span>
+              </div>
+              <p>{{item2.note}}</p>
+              <div class="con-bottom">
+                <span>自购<span class="buy">{{item2.itmoney}}</span>元</span>
+                <span class="con-bottom-follow">跟单<span class="buy">{{item2.copycount}}</span>人</span>
+                <input class="btn1" type="button" value="立即跟单" v-if="item2.ireturnrate != 0" @click.stop="yyAction">
+                <input class="btn2" type="button" value="立即预约" v-if="item2.ireturnrate == 0" @click.stop="yyAction">
+              </div>
+            </div>
+          </li>
+          <!-- </router-link> -->
         </ul>
       </div>
     </div>
@@ -147,7 +164,8 @@
   import {
     sensationList,
     hotDocmentsList,
-    checklogin
+    checklogin,
+    followCopy
   } from '@/request/api';
   export default {
     components: {
@@ -161,7 +179,20 @@
         showBack: false,
         redList: [],
         hotList: [],
-        loginState: false
+        loginState: false,
+        pxList: [{
+            name: '方案金额',
+            index: '0'
+          },
+          {
+            name: '跟单热度',
+            index: '1'
+          },
+          {
+            name: '发单时间',
+            index: '2'
+          }
+        ]
       }
     },
     methods: {
@@ -176,7 +207,7 @@
           const scrollHeight = document.body.scrollHeight || document.documentElement.scrollHeight;
           const clientHeight = document.body.clientHeight || document.documentElement.scrollHeight;
           const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-          if (scrollTop > scrollHeight - clientHeight) {
+          if (scrollTop > (scrollHeight - clientHeight)) {
             //console.log('页面滑动到底部')
             console.log('scrollTop', scrollTop)
             console.log('clientHeight', clientHeight)
@@ -191,10 +222,25 @@
         if (document.documentElement.scrollTop > 100) {
           this.showBack = !this.showBack;
         }
+      },
+      pxAciton(index) {
+        console.log(index)
+      },
+      yyAction() {
+        console.log('点击了')
+        this.$router.push({
+          path: '/gd/gdxq'
+        });
+      },
+      toAction() {
+        this.$router.push({
+          path: '/gd/originator'
+        });
       }
-      
-    },
-    created() {
+    }
+
+  ,
+  created() {
       //触发底部显示无数据
       this.loadingAction();
       //红人数据
@@ -205,8 +251,8 @@
       })
       //热门跟单数据
       hotDocmentsList({
-        'fid': 'web_jczq_hot_List',
-        'ps': 1,
+        'fid': 'web_jczqList',
+        'ps': 10,
         'pn': 1
       }).then(res => {
         this.hotList = res.Resp.rows.row
@@ -425,6 +471,46 @@
       }
     }
 
+    .paixu {
+      display: block;
+      width: 100%;
+      height: 0.78rem;
+      background-color: #FFFFFF;
+      /* position: absolute;
+      top: 3rem; */
+      z-index: 99;
+      border-bottom: 1px solid #eeeeee;
+
+      /* display: none; */
+      li {
+        width: 1.35rem;
+        float: left;
+        list-style: none;
+        margin-left: 0.85rem;
+
+        p {
+          display: block;
+          font-size: 0.28rem;
+          float: left;
+          line-height: 0.78rem;
+        }
+      }
+
+      .active {
+        color: #d81d37;
+      }
+
+      .jiantou1 {
+        background: url('../../assets/img/gd/huisjt.png');
+        background-size: cover;
+        float: left;
+        width: 0.1rem;
+        height: 0.24rem;
+        margin-top: 0.28rem;
+        margin-left: 0.1rem;
+      }
+    }
+
     .hot-bottom {
       .gditem {
         position: relative;
@@ -448,6 +534,16 @@
               border-radius: 50%;
               vertical-align: top;
               transform: scaleX(1);
+            }
+
+            .crow {
+              width: 0.4rem;
+              height: 0.36rem;
+              position: absolute;
+              top: 0.1rem;
+              left: 0.9rem;
+              background: url('../../assets/img/hg.png') no-repeat;
+              background-size: cover;
             }
           }
 
@@ -605,7 +701,21 @@
               border-radius: 50px;
               position: absolute;
               right: 0.2rem;
+              z-index: 99;
             }
+
+            .btn2 {
+              width: 1.74rem;
+              height: 0.48rem;
+              border: 1px solid #fb9a53;
+              background: #FFFFFF;
+              color: #fb9a53;
+              border-radius: 50px;
+              position: absolute;
+              right: 0.2rem;
+              z-index: 99;
+            }
+
           }
         }
       }
@@ -613,29 +723,29 @@
     }
   }
 
-    .back {
-      display: inline;
-      width: 0.7rem;
-      height: 0.7rem;
-      position: fixed;
-      bottom: 2rem;
-      right: .5rem;
-      z-index: 9999;
-    }
+  .back {
+    display: inline;
+    width: 0.7rem;
+    height: 0.7rem;
+    position: fixed;
+    bottom: 2rem;
+    right: .5rem;
+    z-index: 9999;
+  }
 
-    .loading {
-      /* display: none; */
-      overflow: hidden;
-      height: 1.3em;
-      margin-top: -0.3em;
-      line-height: 1.5em;
-      vertical-align: text-bottom;
-      position: fixed;
-      bottom: 1rem;
-      font-size: 0.32rem;
-      text-align: center;
-      width: 100%;
-      background: #EEE;
-    }
+  .loading {
+    /* display: none; */
+    overflow: hidden;
+    height: 1.3em;
+    margin-top: -0.3em;
+    line-height: 1.5em;
+    vertical-align: text-bottom;
+    position: fixed;
+    bottom: 1rem;
+    font-size: 0.32rem;
+    text-align: center;
+    width: 100%;
+    background: #EEE;
+  }
 
 </style>

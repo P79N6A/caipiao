@@ -50,7 +50,7 @@
     <nav class="title">
       <el-tabs class="box" v-model="activeName" @tab-click="handleClick">
         <el-tab-pane class="follow" label="方案详情" name="first">
-          <table class="project" border="0" cellpadding="0" cellspacing="0" >
+          <table class="project" border="0" cellpadding="0" cellspacing="0">
             <caption class="t-title">过关方式：单关 </caption>
             <thead class="t-top">
               <tr>
@@ -81,13 +81,14 @@
         </el-tab-pane>
         <el-tab-pane class="customized" label="跟单用户" name="second">
           <ul class="gd-list">
-            <li v-for="(item, index) in copyUserList"><span class="name">{{item.nickname}}</span><span class="mount"><s>{{item.imoney}}</s>元</span> <span class="time">{{item.cadddate.slice(5,16)}}</span></li>
+            <li v-for="(item, index) in copyUserList"><span class="name">{{item.nickname}}</span><span
+                class="mount"><s>{{item.imoney}}</s>元</span> <span class="time">{{item.cadddate.slice(5,16)}}</span>
+            </li>
             <li><span class="name">一笑******</span><span class="mount"><s>10</s>元</span> <span class="time">08-26
                 21:11</span></li>
           </ul>
         </el-tab-pane>
       </el-tabs>
-
     </nav>
 
     <!-- <div class="buy">
@@ -98,23 +99,25 @@
 
     <footer class="footer-wrap">
       <ul class='clearfix num'>
-        <li v-for="(value, index) in numList" @click="chooseAction(index)" >{{value}}
-          <span class="choose" v-show="index !== i">
+        <li v-for="(value, index) in numList" @click="chooseAction(index)">{{value}}
+          <span class="choose">
             <!-- <img src="../../assets/img/gd/chechicon.png" alt=""> -->
           </span>
         </li>
 
       </ul>
-      <!-- <div class='clearfix foot'>
-          <input type="button" value='-' class='substract' name="">
-          <input type="number"  style="display: none;"/>
-          <input type="number" value='5' name="" class='val'>
-          <input type="button"  value='+' class='add' name="">
-          <div>
-              共<s>10元</s>
-          </div>
-          <div class='followMe' >立即预约</div>
-      </div> -->
+      <div class='clearfix foot'>
+        <!-- <input type="button" value='-' class='substract' name=""> -->
+        <span class="reduce" @click="reduceAction">-</span>
+        <input type="number" style="display: none;" />
+        <input type="number" value='5' name="" class='val'>
+        <span class="add" @click="addAction">+</span>
+        <!-- <input type="button" value='+' class='add' name=""> -->
+        <div>
+          共<s>10元</s>
+        </div>
+        <div class='followMe'>立即预约</div>
+      </div>
       <!-- <el-input-number size="mini" v-model="num"></el-input-number> -->
       <div class="down" id="myDown" v-show="showFooter">
         <span class="close" id="close" @click="closeAction">X</span>
@@ -151,41 +154,48 @@
       }
     },
     methods: {
+      //返回按钮
       backAction() {
         this.$router.go(-1);
-      },
-      changeIndex(index) {
-        this.selectIndex = index
       },
       closeAction() {
         this.showFooter = !this.showFooter
       },
       chooseAction(index) {
-        this.i = index
+        console.log(index);
       },
       handleClick(tab, event) {
-        console.log(tab, event);
-      }
+        //console.log(tab, event);
+      },
+      //减
+      reduceAction() {
+        console.log('-')
+      },
+      //加
+      addAction() {
+        console.log('+')
+      },
+
     },
     created() {
       copyDetail({
-        'gid': 70,
-        'hid': 'CP70150795445'
-      }).then(res => {
-        this.copyDetailList = res.Resp
-      }),
-      copyUsers({
-        'gid': 70,
-        'hid': 'CP70150795445',
-        'pn': 1
-      }).then( res => {
-        this.copyUserList = res.Resp.userlist.userinfo
-      }),
-      guoguan({
-        'r': '0.5496727684465395'
-      }).then( res => {
-        this.guoguanList = res.items.item
-      })
+          'gid': 70,
+          'hid': 'CP70150795445'
+        }).then(res => {
+          this.copyDetailList = res.Resp
+        }),
+        copyUsers({
+          'gid': 70,
+          'hid': 'CP70150795445',
+          'pn': 1
+        }).then(res => {
+          this.copyUserList = res.Resp.userlist.userinfo
+        }),
+        guoguan({
+          'r': '0.5496727684465395'
+        }).then(res => {
+          this.guoguanList = res.items.item
+        })
     }
 
   }
@@ -509,7 +519,7 @@
     width: 100%;
     height: 0.88rem;
     /* border-bottom: 1px solid #ccc; */
-    
+
     .t-box {
       width: 100%;
     }
@@ -649,6 +659,7 @@
         margin-right: 0.16rem;
         color: #333;
         position: relative;
+        background: url('../../assets/img/gd/chechicon.png') cover;
 
         .choose {
           display: block;
@@ -725,6 +736,83 @@
         color: #FFFFFF;
         font-size: 15px;
         border-radius: 5px;
+      }
+    }
+
+    .foot {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0 0.32rem;
+      outline-style: none;
+      padding-bottom: 0.2rem;
+
+      input, span {
+        float: left;
+        display: block;
+        outline-style: none;
+        -webkit-appearance: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .add , .reduce {
+        -webkit-appearance: none;
+        -webkit-tap-highlight-color: transparent;
+        border: 1px solid #d81d36;
+        border-radius: 50%;
+        background: #fff;
+        width: 0.5rem;
+        height: 0.5rem;
+        font-size: 0.3rem;
+        margin-top: 0.1rem;
+        text-align: center;
+        line-height: 0.4rem;
+        box-sizing: border-box;
+        padding: 0;
+      }
+
+      input[type='number'] {
+        border: 1px solid #eee;
+        height: 0.5rem;
+        width: 1.4rem;
+        text-align: center;
+        line-height: 0.5rem;
+        margin: 0 0.18rem;
+        box-sizing: border-box;
+        font-size: 0.3rem;
+        margin-top: 4px;
+      }
+
+      div {
+        display: block;
+        float: left;
+        color: #333;
+        font-size: 0.32rem;
+        line-height: 0.6rem;
+        height: 0.5rem;
+        margin-left: 0.32rem;
+
+        s {
+          margin-left: 0.16rem;
+          line-height: 0.5rem;
+          font-style: normal;
+          color: #d81d36;
+          text-decoration: none;
+          font-size: 0.32rem;
+        }
+      }
+
+      .followMe {
+        float: right;
+        width: 1.76rem;
+        height: 0.54rem;
+        background: #ff8200;
+        text-align: center;
+        line-height: 0.54rem;
+        border-radius: 0.27rem;
+        font-size: 0.3rem;
+        color: #fff;
+        text-decoration: none;
       }
     }
   }

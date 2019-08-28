@@ -137,7 +137,7 @@ export const checklogin = p =>get('/api/phpu/cl.phpx',p)
 //红人
 export const sensationList = p => get('/api//cpdata/copy/webRedPersons.json', p)
 //热门跟单列表
-export const hotDocmentsList = p => get('/api/phpt/copyJczqs.phpx', p);
+export const hotDocmentsList = p => post('/api/phpt/copyJczqs.phpx', p);
 //全部红人
 export const allSensationList = p => get('/api/cpdata/copy/webRedPersonList.json', p);
 //晒红单
@@ -163,5 +163,6 @@ export const copyUser = p => get('/api/phpu/webcopyUserAutos.phpx', p);
 export const copyUsers = p => get('/api/phpt/copyUserLists.phpx', p);
 //方案详情
 export const guoguan = p => get('/api/cpdata/guoguan/70/20190826/proj/cp70150795445.json', p);
-
+//关注
+export const followCopy = p => get('/api/phpu/webFollowCopys.phpx', p);
 

@@ -6,7 +6,7 @@
       <router-link to="/gd/Billingf">
         <!-- <div class="animated zoomIn"> -->
           <!-- <div class="yyfd" :class="[showFd ? 'rotate' : 'unrotate']"></div> -->
-          <img class="yyfd" src="../assets/img/gd/yyfd.png" alt="" :class="[showFd ? 'unrotate' : 'rotate']">
+          <img class="yyfd" src="../assets/img/gd/yyfd.png" alt="" >
         <!-- </div> -->
       </router-link>
       <router-link to="jczq/jchh">
@@ -130,6 +130,8 @@
     height: 1rem;
     border-top: 1px solid #c1c1c1;
     background-color: #FFFFFF;
+    z-index: 999;
+
   }
 
   .home,

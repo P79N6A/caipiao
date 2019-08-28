@@ -11,6 +11,9 @@
         <div class='logo'>
           <img :src="'/api'+deailList.imageUrl" alt="">
         </div>
+        <ul class="userTit" style="display: block;">
+          <li v-for="value in deailList.usertitles">{{value.usertitle}}</li>
+        </ul>
         <p class='name'>{{deailList.cnickname}}</p>
         <p class='desc'>
           <span class='fans'>粉丝:{{deailList.ifoucsnum}}</span>
@@ -43,13 +46,13 @@
       </div>
       <div class='near-box'>
         <span>近5期</span>
-        <ul class="fnow" v-for="(value, index) in ismoneyList.slice(0,1)">
+        <ul class="fnow" v-for="(value, index) in ismoneyList.slice(0,1)" :key="value.period">
           <!-- <li class="nohit" v-if="value.ismoney = 0">未</li> -->
-          <li :class="value.ismoney=1 ? 'nohit' : ''">红</li>
-          <li :class="value.ismoney=1 ? 'nohit' : ''">红</li>
-          <li :class="value.ismoney=1 ? 'nohit' : ''">红</li>
-          <li :class="value.ismoney=1 ? 'nohit' : ''">红</li>
-          <li :class="value.ismoney=1 ? 'nohit' : ''">红</li>
+          <li :class="value.ismoney=0 ? 'nohit' : ''"></li>
+          <li :class="value.ismoney=0 ? 'nohit' : ''"></li>
+          <li :class="value.ismoney=0 ? 'nohit' : ''"></li>
+          <li :class="value.ismoney=0 ? 'nohit' : ''"></li>
+          <li :class="value.ismoney=0 ? 'nohit' : ''"></li>
         </ul>
       </div>
     </div>
@@ -94,17 +97,17 @@
       <div class="foot_left">
         <img src="../../assets/img/gd/fot3.png" />
         <span class="guanzhu red">关注</span>
-      </div>      
+      </div>
       <!-- <div class="foot_left" v-else="showWgz">
           <img src="../../assets/img/gd/fot1.png" />
           <span class="guanzhu red">已关注</span>
         </div> -->
       <router-link to="/gd/dzgd">
-      <div class="foot_right">
-        <img src="../../assets/img/gd/fot4.png" />
-        <span class="dzgd">定制跟单</span>
-      </div>
-    </router-link>
+        <div class="foot_right">
+          <img src="../../assets/img/gd/fot4.png" />
+          <span class="dzgd">定制跟单</span>
+        </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -143,9 +146,10 @@
       myrecord({
           'owner': 12501549
         }).then(res => {
-          console.log(res)
+          console.log(this.deailList)
           this.deailList = res.Resp.row;
           this.ismoneyList = res.Resp.row.result;
+          
         }),
         //跟单详情
         followUserDetail({
@@ -215,6 +219,33 @@
         /* background: url('../../assets/img/gd/hongren.png') no-repeat;
         background-size: 110%;
         background-position: center; */
+      }
+
+      .userTit {
+        display: block;
+        position: relative;
+
+        li {
+          position: absolute;
+          text-align: center;
+          border-radius: 50%;
+          box-sizing: border-box;
+          border: 0.05rem solid rgba(185, 197, 238, 0.15);
+          background: rgba(255, 255, 255, 0.08);
+          color: #b9c5ee;
+          line-height: 100%;
+        }
+
+        li:nth-child(1) {
+          width: 1rem;
+          height: 1rem;
+          font-size: 0.22rem;
+          top: -0.3rem;
+          right: 1.84rem;
+          padding-left: 1%;
+          padding-top: 3%;
+          padding-right: 1%;
+        }
       }
 
       .name {
@@ -316,19 +347,7 @@
       height: 1.18rem;
       border-bottom: 0.2rem solid rgb(238, 238, 238);
 
-      .nohit {
-        float: left;
-    font-size: 0.26rem;
-    color: #fff;
-    width: 0.52rem;
-    height: 0.52rem;
-    text-align: center;
-    line-height: 0.45rem;
-    border: 3px solid #999;
-    border-radius: 50%;
-    box-sizing: border-box;
-    background: #999;
-      }
+      
 
       span {
         font-size: 0.28rem;
@@ -339,12 +358,29 @@
         float: left;
       }
 
-      ul {
+      .fnow {
         overflow: hidden;
         /* box-sizing:border-box; */
         padding-left: 0.76rem;
         padding-top: 0.36rem;
         height: 0.52rem;
+
+        .nohit {
+        /* float: left;
+          font-size: 0.26rem;
+          color: #fff;
+          width: 0.5rem;
+          height: 0.5rem;
+          text-align: center;
+          line-height: 0.45rem;
+          border-radius: 50%;
+          box-sizing: border-box;
+          margin-right: 0.62rem;
+          position: relative;
+          line-height: 0.4rem; */
+          border: 3px solid #999;
+          background: #999
+      }
 
         li {
           float: left;
@@ -354,13 +390,13 @@
           height: 0.5rem;
           text-align: center;
           line-height: 0.45rem;
-          border: 3px solid #f66;
           border-radius: 50%;
           box-sizing: border-box;
-          background: #f66;
           margin-right: 0.62rem;
           position: relative;
           line-height: 0.4rem;
+          border: 3px solid #f66;
+          background: #f66;
         }
 
         li::after {

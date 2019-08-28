@@ -4,8 +4,7 @@
       <el-tab-pane class="follow" label="我的关注" name="first">
         <!-- <p>暂无关注用户</p> -->
         <ul class='my-watch'>
-          <router-link to="/gd/originator">
-            <li class='clearfix wdgz' v-for="(item,index) in copyList" :key="item.uid" v-show="showList">
+            <li class='clearfix wdgz' v-for="(item,index) in copyList" :key="item.uid" v-show="showList" @click="toAction">
               <div class='touxiang'>
                 <img :src="'/api' + item.imageUrl" alt="" class='tx'>
                 <img src="../../../assets/img/hg.png" class='hg' alt="">
@@ -15,10 +14,9 @@
                     class='hit'>{{item.allnum}}中{{item.hitnum}}</span></div>
                 <div><span>7日盈利率：<s>{{item.profit}}%</s></span><span>粉丝：<s>{{item.ifoucsnum}}</s></span></div>
               </div>
-              <div class='delete' @click="clearAction(index)">
+              <div class='delete' @click.stop="clearAction(index)">
               </div>
             </li>
-          </router-link>
         </ul>
       </el-tab-pane>
       <el-tab-pane class="customized" label="我的定制" name="second">
@@ -70,9 +68,12 @@
       handleClick(tab, event) {
         //console.log(tab, event);
       },
+      toAction() {
+        this.$router.push('/gd/originator')
+      },
       clearAction(index) {
-        let li_list = document.getElementsByClassName('my-watch').querySelectorAll('li');
-        li_list(index).remove();
+        console.log('点击了')
+        this.copyList.splice(index, 1);
       }
     },
     created() {
@@ -376,4 +377,7 @@
     margin: 0;
   }
 
+</style>
+
+<style scoped>
 </style>
