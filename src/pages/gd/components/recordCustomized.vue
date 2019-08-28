@@ -1,10 +1,10 @@
 <template>
   <div class="customized">
-   <nav class="nav">
-       <div class="nav-wrap">
-         <ul>
-           <li></li>
-         </ul>
+    <nav class="nav">
+      <div class="nav-wrap">
+        <ul>
+          <li></li>
+        </ul>
         <span @click.prevent="flag=true">我定制的人</span>
         <span @click.prevent="flag=false">定制我的人</span>
       </div>
@@ -19,7 +19,7 @@
           <p>暂无数据</p>
         </el-tab-pane>
       </el-tabs> -->
-  
+
   </div>
 </template>
 
@@ -33,19 +33,24 @@
     },
     data() {
       return {
-        navList: [
-          {name: '我定制的人'},
-          {name: '定制我的人'}
+        navList: [{
+            name: '我定制的人'
+          },
+          {
+            name: '定制我的人'
+          }
         ],
         flag: true
       }
     }
   }
+
 </script>
 
 <style lang="scss" scoped>
   .customized {
-      overflow: hidden;
+    overflow: hidden;
+
     .nav {
       width: 100%;
       height: 1rem;
@@ -72,19 +77,25 @@
           line-height: 0.48rem;
           color: #333;
           font-weight: 100;
+
           &.active {
             background-color: #d81d36;
           }
         }
       }
+
+      .active {
+        background-color: #d81d36;
+        color: #fff;
+      }
     }
 
     .show-box {
-            width: 100%;
-            font-size: 0.3rem;
-            text-align: center;
-             margin-top: .5rem
-            }
+      width: 100%;
+      font-size: 0.3rem;
+      text-align: center;
+      margin-top: .5rem
+    }
 
   }
 
