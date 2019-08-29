@@ -52,9 +52,9 @@
       <!-- 红人导航 -->
       <div class="sensation-bottom">
         <ul>
-          <!-- <router-link to="{path:'originator', query:{uid: '11716948'}}"> -->
-          <router-link to='/gd/originator'>
-            <li v-for="(item, index) in redList.slice(0,7)" :key="item.uid">
+          <router-link :to="{ path:'/gd/originator', query: { uid:  12984808} }">
+            <!-- <router-link to='/gd/originator'> -->
+            <li v-for="(item, index) in redList.slice(0,7)" :key="item.uid" @click="toAction">
               <img :src="'/api'+item.imageUrl" alt="" />
               <p>{{item.nickname}}</p>
             </li>
@@ -90,18 +90,19 @@
         </div>
       </div>
       <ul class="paixu">
-        <li class="" data-px="qb" v-for="(item3, index) in pxList" @click="pxAciton(index)">
-          <p>{{item3.name}}</p>
+        <!-- <li class="" data-px="qb" v-for="(item3, index) in pxList" @click="pxAciton(index)"> -->
+        <li @click="moneyAction">
+          <p>方案金额</p>
           <span class="jiantou1"></span>
         </li>
-        <!-- <li data-px="rd" class="">
+        <li @click="hotAction">
           <p>跟单热度</p>
           <span class="jiantou1"></span>
         </li>
-        <li data-px="time" class="current">
+        <li @click="timeAction">
           <p>发单时间</p>
           <span class="jiantou1"></span>
-        </li> -->
+        </li>
       </ul>
       <!-- 跟单列表 -->
       <div class="hot-bottom">
@@ -195,6 +196,7 @@
         ]
       }
     },
+    computed: {},
     methods: {
       //点击返回顶部
       backTopAction() {
@@ -217,30 +219,60 @@
           }
         })
       },
+      //判断出现回到顶部
       handleScroll() {
         console.log(document.documentElement.scrollTop);
         if (document.documentElement.scrollTop > 100) {
           this.showBack = !this.showBack;
         }
       },
-      pxAciton(index) {
-        console.log(index)
+      //金额排序
+      moneyAction() {
+        this.hotList.sort((a, b) => {
+          return b.itmoney - a.itmoney
+        })
+
       },
+      //热度排序
+      hotAction() {
+        this.hotList.sort((a, b) => {
+          return b.copycount - a.copycount
+        })
+
+      },
+      //时间排序
+      timeAction() {
+        console.log('点击了')
+        this.hotList.sort((a, b) => {
+          //return (b.cendtime - b.time) - (a.cendtime - b.time)
+          return  a.cendtime.split('') -b.cendtime.split('')
+        })
+
+      },
+
+      //立即跟单
       yyAction() {
         console.log('点击了')
         this.$router.push({
-          path: '/gd/gdxq'
+          path: '/gd/gdxq',
         });
       },
+      //列表跳转
       toAction() {
         this.$router.push({
-          path: '/gd/originator'
+          path: '/gd/originator',
+          query: {
+            uid: 'redList.uid'
+          }
         });
+      },
+      requestData(uid) {
+        console.log('uid', uid)
       }
     }
 
-  ,
-  created() {
+    ,
+    created() {
       //触发底部显示无数据
       this.loadingAction();
       //红人数据
@@ -270,6 +302,7 @@
     },
     mounted() {
       window.addEventListener('scroll', this.handleScroll);
+      //console.log(this.$route.params)
     },
     destroyed() {
       window.removeEventListener('scroll', this.handleScroll);

@@ -99,26 +99,25 @@
 
     <footer class="footer-wrap">
       <ul class='clearfix num'>
-        <li v-for="(value, index) in numList" @click="chooseAction(index)">{{value}}
-          <span class="choose">
-            <!-- <img src="../../assets/img/gd/chechicon.png" alt=""> -->
-          </span>
+        <li v-for="(value, index) in numList" @click="chooseAction(index)" :class="isactive == index ? 'choose':''">
+          {{value}}
+          <!-- <span class="choose">
+            <img src="../../assets/img/gd/chechicon.png" alt="">
+          </span> -->
         </li>
 
       </ul>
       <div class='clearfix foot'>
-        <!-- <input type="button" value='-' class='substract' name=""> -->
+        <!-- <el-input-number size="mini" v-model="num"></el-input-number> -->
         <span class="reduce" @click="reduceAction">-</span>
         <input type="number" style="display: none;" />
         <input type="number" value='5' name="" class='val'>
         <span class="add" @click="addAction">+</span>
-        <!-- <input type="button" value='+' class='add' name=""> -->
         <div>
           共<s>10元</s>
         </div>
-        <div class='followMe'>立即预约</div>
+        <div class='followMe' @click="yyAction">立即预约</div>
       </div>
-      <!-- <el-input-number size="mini" v-model="num"></el-input-number> -->
       <div class="down" id="myDown" v-show="showFooter">
         <span class="close" id="close" @click="closeAction">X</span>
         <img src="../../assets/img/gd/lottery_icon.png">
@@ -138,6 +137,9 @@
     copyUsers,
     guoguan
   } from '@/request/api'
+  import {
+    get
+  } from '@/request/http';
   export default {
     data() {
       return {
@@ -148,9 +150,12 @@
         guoguanList: [],
         showFooter: true,
         showChoose: false,
+        isactive: -1,
         num: 5,
         i: -1,
-        activeName: 'first'
+        activeName: 'first',
+        gid: '',
+        hid: ''
       }
     },
     methods: {
@@ -158,11 +163,14 @@
       backAction() {
         this.$router.go(-1);
       },
+      //关闭下载
       closeAction() {
         this.showFooter = !this.showFooter
       },
+      //选择倍数
       chooseAction(index) {
         console.log(index);
+        this.isactive = index;
       },
       handleClick(tab, event) {
         //console.log(tab, event);
@@ -175,15 +183,28 @@
       addAction() {
         console.log('+')
       },
-
+      //预约按钮
+      yyAction() {
+        this.$router.push('/gd/submit');
+      }
     },
     created() {
+      let gid = this.$route.params.gid,
+          hid = this.$route.params.hid
+      //被跟单信息
       copyDetail({
           'gid': 70,
           'hid': 'CP70150795445'
         }).then(res => {
           this.copyDetailList = res.Resp
         }),
+        /*copyDetail({
+          'gid': gid,
+          'hid': hid
+        }).then(res => {
+          this.copyDetailList = res.Resp
+        }),*/
+        //跟单用户
         copyUsers({
           'gid': 70,
           'hid': 'CP70150795445',
@@ -191,11 +212,16 @@
         }).then(res => {
           this.copyUserList = res.Resp.userlist.userinfo
         }),
+        //方案详情
         guoguan({
-          'r': '0.5496727684465395'
+          'r': Math.random()
         }).then(res => {
           this.guoguanList = res.items.item
         })
+      console.log(this.$route)
+    },
+    mounted() {
+      //console.log(this.$route)
     }
 
   }
@@ -659,18 +685,15 @@
         margin-right: 0.16rem;
         color: #333;
         position: relative;
-        background: url('../../assets/img/gd/chechicon.png') cover;
-
-        .choose {
-          display: block;
-          position: absolute;
-          width: .7rem;
-          top: .04rem;
-          left: .84rem;
-          background: url('../../assets/img/gd/chechicon.png') cover;
-        }
+        /* background: url('../../assets/img/gd/chechicon.png') cover; */
       }
 
+      .choose {
+        display: block;
+        background: url('../../assets/img/gd/chechicon.png') no-repeat;
+        background-position: .85rem .18rem;
+        background-size: 45%;
+      }
 
 
     }
@@ -747,7 +770,8 @@
       outline-style: none;
       padding-bottom: 0.2rem;
 
-      input, span {
+      input,
+      span {
         float: left;
         display: block;
         outline-style: none;
@@ -755,7 +779,8 @@
         -webkit-tap-highlight-color: transparent;
       }
 
-      .add , .reduce {
+      .add,
+      .reduce {
         -webkit-appearance: none;
         -webkit-tap-highlight-color: transparent;
         border: 1px solid #d81d36;

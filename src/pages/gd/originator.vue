@@ -12,7 +12,8 @@
           <img :src="'/api'+deailList.imageUrl" alt="">
         </div>
         <ul class="userTit" style="display: block;">
-          <li v-for="value in deailList.usertitles">{{value.usertitle}}</li>
+          <!-- <li v-for="value in deailList.usertitles">{{value.usertitle}}</li> -->
+          <li>{{deailList.usertitles.usertitle}}</li>
         </ul>
         <p class='name'>{{deailList.cnickname}}</p>
         <p class='desc'>
@@ -136,6 +137,7 @@
       }
     },
     created() {
+      console.log(this.$route.params)
       //用户详情
       userInfo({
         "fid": "u_ainfo"
@@ -144,21 +146,24 @@
         this.userUid = res.Resp.row.userid
       })
       myrecord({
-          'owner': 12501549
+          'owner': 12984808
         }).then(res => {
-          console.log(this.deailList)
+          //console.log(this.deailList)
           this.deailList = res.Resp.row;
           this.ismoneyList = res.Resp.row.result;
           
         }),
         //跟单详情
-        followUserDetail({
-          'owner': 13047662,
-          'pn': 1
-        }).then(res => {
-          this.userList = res.Resp.rows.row
-          //console.log(res)
-        })
+          followUserDetail({
+            'owner': 13047662,
+            'pn': 1
+          }).then(res => {
+            this.userList = res.Resp.rows.row
+            //console.log(res)
+          })
+    },
+    mounted() {
+      console.log(this.$route.params)
     }
   }
 
@@ -207,7 +212,7 @@
       position: relative;
       overflow: hidden;
 
-      .logo {
+      .logo img{
         width: 1.24rem;
         height: 1.2rem;
         border: 3px solid #fff;

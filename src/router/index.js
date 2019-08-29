@@ -320,6 +320,7 @@ const router = new Router({
           component: () => import('@/pages/gd/originator')
         },
         {
+          //path: 'gdxq/:gid/:hid/:uid/:iupload/:type',
           path: 'gdxq',
           component: () => import('@/pages/gd/gdxq')
         },
@@ -330,6 +331,10 @@ const router = new Router({
         {
           path: 'dzgd',
           component: () => import('@/pages/gd/dzgd')
+        },
+        {
+          path: 'submit',
+          component: () => import('@/pages/gd/submit')
         }
       ]
     }

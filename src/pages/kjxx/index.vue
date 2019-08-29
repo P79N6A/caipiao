@@ -44,7 +44,7 @@
         <div class="kj-list list" v-show='current==1'>
             <ul>
                 <li class="ico-click"  v-for='(item,index) in jjcList'>
-                    <router-link :to='"/kjxx/detailJjc/"+item.gid+"/"+item.pid+"/"+item.gname'>
+                    <router-link '"/kjxx/detailJjc/"+item.gid+"/"+item.pid+"/"+item.gname'>
                         <i></i>
                         <div class="kj">
                             <p class="kj-tit">

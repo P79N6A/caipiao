@@ -84,6 +84,8 @@ Vue.filter('lotteryCode', function (code,n) {  //时间过滤器
 	}
 })
 
+Vue.config.devtools = true;
+
 new Vue({
   el: '#app',
   router,
