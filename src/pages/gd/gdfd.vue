@@ -147,7 +147,7 @@
 
 
     <!-- 返回顶部按钮 -->
-    <img class="back" src="../../assets/img/gd/huojian.png" v-show="showBack" @click="backTopAction" />
+    <img class="back" src="../../assets/img/gd/huojian.png" v-show="toTopShow" @click="scrollToTop" />
 
     <!-- 到达底部 -->
     <div class="loading" v-show="showLoading">
@@ -177,7 +177,7 @@
     data() {
       return {
         showLoading: false,
-        showBack: false,
+        toTopShow: false,
         redList: [],
         hotList: [],
         loginState: false,
@@ -199,31 +199,23 @@
     computed: {},
     methods: {
       //点击返回顶部
-      backTopAction() {
+      scrollToTop() {
         scrollTo(0, 0);
       },
-      //底部显示无数据
-      loadingAction() {
-        window.addEventListener('scroll', function () {
-          //console.log(this.scroll.y)
-          const scrollHeight = document.body.scrollHeight || document.documentElement.scrollHeight;
-          const clientHeight = document.body.clientHeight || document.documentElement.scrollHeight;
-          const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-          if (scrollTop > (scrollHeight - clientHeight)) {
-            //console.log('页面滑动到底部')
-            console.log('scrollTop', scrollTop)
-            console.log('clientHeight', clientHeight)
-            console.log('scrollHeight', scrollHeight)
-            this.showLoading = !this.showLoading;
-            this.showBack = !this.showBack;
-          }
-        })
-      },
-      //判断出现回到顶部
       handleScroll() {
-        console.log(document.documentElement.scrollTop);
-        if (document.documentElement.scrollTop > 100) {
-          this.showBack = !this.showBack;
+        //修改相对滚动位置
+        console.log(this.scrollTop)
+        this.scrollTop = this.scrollTop = window.pageYOffset || document.body.scrollTop
+        if (this.scrollTop > 300) {
+          this.toTopShow = true
+        }else {
+          this.toTopShow = false
+        }
+        if (this.scrollTop > 1550) {
+          console.log('到底了')
+          this.showLoading = true
+        } else {
+          this.showLoading = false
         }
       },
       //金额排序
@@ -242,10 +234,12 @@
       },
       //时间排序
       timeAction() {
-        console.log('点击了')
         this.hotList.sort((a, b) => {
-          //return (b.cendtime - b.time) - (a.cendtime - b.time)
+          console.log('点击了')
+          //return (b.cendtime.split('') - b.time) - (a.cendtime - b.time)
           return  a.cendtime.split('') -b.cendtime.split('')
+          console.log('点击了',a.cendtime)
+
         })
 
       },
@@ -273,8 +267,6 @@
 
     ,
     created() {
-      //触发底部显示无数据
-      this.loadingAction();
       //红人数据
       sensationList().then(res => {
         this.redList = res
@@ -301,12 +293,14 @@
       })
     },
     mounted() {
-      window.addEventListener('scroll', this.handleScroll);
-      //console.log(this.$route.params)
-    },
+      this.$nextTick(function () {
+        //修改事件监听
+        window.addEventListener('scroll', this.handleScroll)
+        
+      });    },
     destroyed() {
-      window.removeEventListener('scroll', this.handleScroll);
-    }
+      window.removeEventListener('scroll', this.handleScroll)  
+      }
   }
 
 </script>
