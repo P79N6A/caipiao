@@ -42,6 +42,9 @@
         activeNames: ['1']
       }
     },
+    metaInfo: {
+      title: '牛人推荐'
+  	},
     methods: {
       backAction() {
         this.$router.push('/gd');

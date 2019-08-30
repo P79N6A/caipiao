@@ -36,6 +36,9 @@
                 allList: []
             }
         },
+        metaInfo: {
+      title: '全部红人'
+  	},
         methods: {
           backAction() {
             this.$router.push('/gd');

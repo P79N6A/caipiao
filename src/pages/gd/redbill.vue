@@ -31,6 +31,9 @@
                 redbillList: []
             }
         },
+        metaInfo: {
+      title: '晒红单'
+  	},
         methods: {
           backAction() {
             this.$router.push('/gd');

@@ -28,6 +28,9 @@
 
 <script>
     export default {
+        metaInfo: {
+      title: '预约发单'
+  	},
         methods: {
             backAction() {
                 this.$router.push('/gd');

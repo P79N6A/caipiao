@@ -7,7 +7,6 @@
 
         <router-link to='/gd/search'>
           <span class="search"> </span>
-          <!-- <img class="search" src="../../../assets/img/gd/search.png" alt=""/> -->
         </router-link>
 
       </div>
@@ -487,7 +486,6 @@
 
           p {
             font-size: 0.26rem;
-            /* padding-left: 0.3rem; */
             padding-right: 0.2rem;
             margin-bottom: 0.3rem;
             overflow: hidden;

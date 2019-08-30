@@ -63,7 +63,6 @@
         </ul>
       </div>
     </div>
-    <!-- <recordBottom /> -->
     <div class="bottom-wrap">
         <el-tabs class="box" v-model="activeName" @tab-click="handleClick">
           <el-tab-pane class="follow" label="我的关注" name="first">
@@ -114,7 +113,6 @@
 
 <script>
     import myCustomized from './components//recordCustomized'
-  import recordBottom from './components/myRecordBottom'
   import {
     myrecord,
     copyFollowList,
@@ -122,7 +120,6 @@
   } from '@/request/api'
   export default {
     components: {
-      recordBottom,
       myCustomized
       
     },
@@ -135,6 +132,9 @@
         showList: true
       }
     },
+    metaInfo: {
+      title: '我的战绩'
+  	},
     methods: {
       backAction() {
         this.$router.push('/gd');
@@ -735,6 +735,10 @@
     }
   
     .el-tabs__item.is-active {
+      color: #000;
+    }
+
+    ..el-tabs__item:hover {
       color: #000;
     }
   

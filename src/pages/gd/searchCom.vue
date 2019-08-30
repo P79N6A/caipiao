@@ -21,6 +21,9 @@
       return {
       }
     },
+    metaInfo: {
+      title: '搜索--彩票网'
+  	},
     methods: {
       onCancel() {
         this.$router.replace({path:'/gd'});

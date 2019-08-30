@@ -108,24 +108,9 @@
           </li>
         </ul>
       </div>
-      <!-- <ul class="paixu">
-          <li @click="moneyAction">
-            <p>方案金额</p>
-            <span class="jiantou1"></span>
-          </li>
-          <li @click="hotAction">
-            <p>跟单热度</p>
-            <span class="jiantou1"></span>
-          </li>
-          <li @click="timeAction">
-            <p>发单时间</p>
-            <span class="jiantou1"></span>
-          </li>
-        </ul> -->
-
       <!-- 跟单列表 -->
       <div class="hot-bottom">
-        <ul class="daily-list" ref="list" @scroll="handleScroll">
+        <ul>
           <!-- <router-link to='/gd/originator'> -->
           <li class="gditem" v-for="(item2, index) in hotList" :key="item2.projid" @click="toAction">
               <!-- <span class="jlj" v-if="item2.usertitle != null"><strong>{{item2.usertitle}}</strong></span> -->
@@ -182,7 +167,6 @@
   import gdFooter from '@/components/gdFooter';
   import gdProfitList from './components/gdProfitList';
   import gdFollowList from './components/gdFollowList';
-  import { post } from '@/request/http';
   import {
     sensationList,
     hotDocmentsList,
@@ -195,9 +179,6 @@
       gdProfitList,
       gdFollowList
     },
-    metaInfo: {
-      title: '跟单发单'
-  	},
     data() {
       return {
         showLoading: false,
@@ -205,7 +186,6 @@
         redList: [],
         hotList: [],
         loginState: false,
-        isLoading:false,
         pxList: [{
             name: '方案金额',
             index: '0'
@@ -281,11 +261,8 @@
           }
         });
       },
-      getList() {
-        this.isLoading = true;
-        post('/api/phpt/copyJczqs.phpx').then(res => {
-          console.log(res)
-        })
+      requestData(uid) {
+        console.log('uid', uid)
       }
     },
     created() {

@@ -11,36 +11,8 @@
                   <return-user />
               </el-tab-pane>
             </el-tabs>
-        <!-- <ul>
-          <li v-for="(item, index) in titleList" @click="changeIndex(index);" :class="{active: selectIndex===index}">
-            {{item.title}}
-          </li>
-        </ul> -->
-        <!-- <h1 class="active" @click="hitAction">命中榜</h1>
-        <h1 @click="returnAction">盈利榜</h1> -->
       </nav>
     </header>
-    <!-- <hit-user /> -->
-    <!-- <return-user /> -->
-    <!-- <div>
-      <ul>
-        <li class="list" v-for="item in profitList" :key="item.uid">
-          <div class="list_t clearfix">
-            <div id="content_l">
-              <img :src="item.imageUrl" />
-              <span class="crow"></span>
-            </div>
-            <div id="content_l1">
-              <p class="clearfix">
-                <span>{{item.nickname}}</span></p>
-              <span class="org">近7日命中数 ：<i class="red">{{item.allnum}}中{{item.hitnum}}</i></span>
-            </div>
-            <input type="button" id="btn1" value="跟单" />
-            <span class="cirl">1</span>
-          </div>
-        </li>
-      </ul>
-    </div> -->
   </div>
 </template>
 
@@ -65,6 +37,9 @@
         activeName: 'first'
       }
     },
+    metaInfo: {
+      title: '热门榜单'
+  	},
     components: {
       hitUser,
       returnUser

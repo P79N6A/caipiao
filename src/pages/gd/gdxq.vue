@@ -100,7 +100,7 @@
     <footer class="footer-wrap">
       <ul class='clearfix num'>
         <li v-for="(value, index) in numList" @click="chooseAction(index)" :class="isactive == index ? 'choose':''">
-          {{value}}
+          {{value.name}}
           <!-- <span class="choose">
             <img src="../../assets/img/gd/chechicon.png" alt="">
           </span> -->
@@ -143,7 +143,11 @@
   export default {
     data() {
       return {
-        numList: ['10倍', '20倍', '50倍', '100倍'],
+        numList: [
+          {name: '10倍', num: 10}, 
+          {name: '20倍', num: 20}, 
+          {name: '50倍', num: 50}, 
+          {name: '100倍', num: 100}],
         selectIndex: 0,
         copyDetailList: [],
         copyUserList: [],
@@ -158,6 +162,9 @@
         hid: ''
       }
     },
+    metaInfo: {
+      title: '跟单详情'
+  	},
     methods: {
       //返回按钮
       backAction() {

@@ -47,13 +47,9 @@
       </div>
       <div class='near-box'>
         <span>近5期</span>
-        <ul class="fnow" v-for="(value, index) in ismoneyList.slice(0,1)" :key="value.period">
-          <!-- <li class="nohit" v-if="value.ismoney = 0">未</li> -->
-          <li :class="value.ismoney=0 ? 'nohit' : ''"></li>
-          <li :class="value.ismoney=0 ? 'nohit' : ''"></li>
-          <li :class="value.ismoney=0 ? 'nohit' : ''"></li>
-          <li :class="value.ismoney=0 ? 'nohit' : ''"></li>
-          <li :class="value.ismoney=0 ? 'nohit' : ''"></li>
+        <ul class="fnow" >
+          <li v-for="(value, index) in ismoneyList" :key="value.period" :class="value.ismoney!=1 ? '' : 'nohit'">
+          </li>
         </ul>
       </div>
     </div>
@@ -131,6 +127,9 @@
         userInfo: new Object()
       }
     },
+    metaInfo: {
+      title: '发单人详情'
+  	},
     methods: {
       backAction() {
         this.$router.push('/gd');
@@ -370,6 +369,10 @@
         padding-top: 0.36rem;
         height: 0.52rem;
 
+        .word-wrap {
+          margin: 0 0 0 .05rem;
+        }
+
         .nohit {
         /* float: left;
           font-size: 0.26rem;
@@ -411,7 +414,7 @@
           position: absolute;
           background: #eee;
           top: 0.22rem;
-          left: 0.5rem;
+          left: 0.44rem;
         }
 
         li:nth-child(5)::after {
@@ -438,7 +441,7 @@
   }
 
   .list-wrap {
-    margin-bottom: 1rem;
+    margin-bottom: .9rem;
 
     .infos {
       /*height:10rem;*/
